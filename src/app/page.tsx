@@ -195,7 +195,7 @@ export default function ChaseMirror() {
         style={{ borderBottom: "1px solid #e0e0e0", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
       >
         <div className="max-w-[1280px] mx-auto px-6">
-          <nav className="flex items-center">
+          <nav className="flex items-center" style={{ gap: "0" }}>
             {navLinks.map((link, i) => (
               <div
                 key={i}
@@ -205,11 +205,12 @@ export default function ChaseMirror() {
               >
                 <a
                   href="#"
-                  className="block px-4 py-3.5 text-[14px] transition-colors hover:no-underline whitespace-nowrap"
+                  className="block text-[14px] transition-colors hover:no-underline whitespace-nowrap"
                   style={{
                     color: activeNav === i ? "#0060a9" : "#333",
                     borderBottom: activeNav === i ? "3px solid #0060a9" : "3px solid transparent",
                     fontWeight: 400,
+                    padding: "14px 20px",
                   }}
                 >
                   {link}
@@ -262,8 +263,8 @@ export default function ChaseMirror() {
 
           {/* Right: Sign-in card */}
           <div
-            className="bg-white rounded-lg p-8 w-[340px] flex-shrink-0"
-            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
+            className="bg-white rounded-lg p-8 flex-shrink-0"
+            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: "320px" }}
           >
             <h2 className="text-[24px] font-bold mb-6" style={{ color: "#1a1a1a" }}>Welcome back</h2>
 
@@ -345,17 +346,18 @@ export default function ChaseMirror() {
           </h2>
 
           {/* Category icons row */}
-          <div className="flex items-center justify-center gap-0">
+          <div className="flex items-center justify-center" style={{ gap: "48px" }}>
             {categories.map((cat, i) => (
               <a
                 key={i}
                 href="#"
-                className="flex flex-col items-center gap-3 px-10 py-4 hover:no-underline group"
+                className="flex flex-col items-center hover:no-underline group"
+                style={{ gap: "12px", padding: "8px 0" }}
               >
                 <div className="text-gray-500 group-hover:text-blue-700 transition-colors">
                   {cat.icon}
                 </div>
-                <span className="text-[14px] group-hover:text-blue-700 transition-colors" style={{ color: "#0060a9" }}>
+                <span className="text-[14px] group-hover:text-blue-700 transition-colors whitespace-nowrap" style={{ color: "#0060a9" }}>
                   {cat.label}
                 </span>
               </a>
@@ -375,26 +377,26 @@ export default function ChaseMirror() {
       {/* ─── PROMO CARDS ROW ─── */}
       <section className="pb-16">
         <div className="max-w-[1280px] mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "20px" }}>
 
             {/* Card 1: J.P. Morgan Wealth Management */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#f5efe6" }}>
-              <div className="p-8">
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#f5efe6", minHeight: "240px" }}>
+              <div style={{ padding: "28px 28px 24px" }}>
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-[22px] font-bold leading-tight mb-1" style={{ color: "#1a1a1a" }}>
+                    <h3 className="text-[20px] font-bold leading-tight" style={{ color: "#1a1a1a" }}>
                       J.P. Morgan Wealth<br />Management
                     </h3>
                   </div>
                   <div className="flex-shrink-0 ml-4">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                      <circle cx="20" cy="25" r="8" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
-                      <circle cx="35" cy="25" r="8" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
-                      <circle cx="27" cy="38" r="8" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                      <circle cx="22" cy="24" r="10" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
+                      <circle cx="42" cy="24" r="10" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
+                      <circle cx="32" cy="40" r="10" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
                     </svg>
                   </div>
                 </div>
-                <p className="text-[14px] text-gray-700 mt-3 mb-5 leading-relaxed">
+                <p className="text-[14px] text-gray-700 leading-relaxed" style={{ marginTop: "16px", marginBottom: "20px" }}>
                   Invest your way with J.P. Morgan. Whether you choose to work with a financial advisor or self-direct your investments.
                 </p>
                 <a href="#" className="text-[14px] font-semibold flex items-center gap-1" style={{ color: "#0060a9" }}>
@@ -404,22 +406,22 @@ export default function ChaseMirror() {
             </div>
 
             {/* Card 2: Chase High School Checking */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0060a9" }}>
-              <div className="p-8">
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0060a9", minHeight: "240px" }}>
+              <div style={{ padding: "28px 28px 24px" }}>
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-[22px] font-bold leading-tight mb-1 text-white">
+                    <h3 className="text-[20px] font-bold leading-tight text-white">
                       Chase High School<br />Checking<sup>SM</sup>
                     </h3>
                   </div>
                   <div className="flex-shrink-0 ml-4">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                      <circle cx="30" cy="30" r="20" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" fill="none" />
-                      <text x="30" y="35" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="18">$</text>
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                      <circle cx="32" cy="32" r="24" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" fill="none" />
+                      <text x="32" y="38" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="22" fontWeight="bold">$</text>
                     </svg>
                   </div>
                 </div>
-                <p className="text-[14px] text-white/80 mt-3 mb-5 leading-relaxed">
+                <p className="text-[14px] text-white/80 leading-relaxed" style={{ marginTop: "16px", marginBottom: "20px" }}>
                   Set your teen up for financial success with a checking account designed for ages 13-17.
                 </p>
                 <a href="#" className="text-[14px] font-semibold flex items-center gap-1 text-white hover:text-white">
@@ -429,24 +431,29 @@ export default function ChaseMirror() {
             </div>
 
             {/* Card 3: Chase Freedom */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#d32f2f" }}>
-              <div className="p-8">
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#c41230", minHeight: "240px" }}>
+              <div style={{ padding: "28px 28px 24px" }}>
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-[22px] font-bold leading-tight mb-1 text-white">
+                    <h3 className="text-[20px] font-bold leading-tight text-white">
                       Chase<br />Freedom<sup>®</sup>
                     </h3>
                   </div>
                   <div className="flex-shrink-0 ml-4">
                     <div
-                      className="w-[70px] h-[44px] rounded-md flex items-center justify-center"
-                      style={{ background: "linear-gradient(135deg, #1565c0, #1976d2)" }}
+                      className="rounded-md flex items-center justify-center"
+                      style={{
+                        width: "80px",
+                        height: "50px",
+                        background: "linear-gradient(135deg, #2a5298, #1e3c72)",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                      }}
                     >
-                      <span className="text-white text-[8px] font-bold">VISA</span>
+                      <span className="text-white text-[10px] font-bold tracking-wider">VISA</span>
                     </div>
                   </div>
                 </div>
-                <p className="text-[14px] text-white/80 mt-3 mb-5 leading-relaxed">
+                <p className="text-[14px] text-white/85 leading-relaxed" style={{ marginTop: "16px", marginBottom: "20px" }}>
                   Earn unlimited 1.5% cash back on all purchases. No annual fee and no minimum to redeem.
                 </p>
                 <a href="#" className="text-[14px] font-semibold flex items-center gap-1 text-white hover:text-white">

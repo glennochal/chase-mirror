@@ -2,78 +2,16 @@
 
 import { useState } from "react";
 
-/* ───────── Chase Logo (SVG octagon) ───────── */
-function ChaseLogo({ size = 36, color = "#0060a9" }: { size?: number; color?: string }) {
-  const unit = size / 4;
-  const gap = 1.5;
-  const r = 1.5;
-  const pieces = [
-    { x: 0, y: unit + gap, w: unit * 2 - gap, h: unit - gap },
-    { x: unit + gap, y: 0, w: unit - gap, h: unit * 2 - gap },
-    { x: unit * 2 + gap, y: unit + gap, w: unit * 2 - gap, h: unit - gap },
-    { x: unit + gap, y: unit * 2 + gap, w: unit - gap, h: unit * 2 - gap },
-  ];
+/* ───── Chase Logo Mark ───── */
+function ChaseLogoMark({ size = 30, color = "#0060a9" }: { size?: number; color?: string }) {
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {pieces.map((p, i) => (
-        <rect key={i} x={p.x} y={p.y} width={p.w} height={p.h} rx={r} fill={color} />
-      ))}
-    </svg>
-  );
-}
-
-/* ───────── Icons (simple SVG) ───────── */
-function CreditCardIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-      <rect x="2" y="5" width="20" height="14" rx="2" />
-      <path d="M2 10h20" />
-      <path d="M6 14h4" />
-    </svg>
-  );
-}
-
-function BankIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-      <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M8 10v11M12 10v11M16 10v11M20 10v11" />
-    </svg>
-  );
-}
-
-function SavingsIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 6v12M8 10h8M8 14h8" />
-    </svg>
-  );
-}
-
-function CarIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-      <path d="M5 17h14M5 17a2 2 0 01-2-2V9a2 2 0 012-2h1l2-3h8l2 3h1a2 2 0 012 2v6a2 2 0 01-2 2" />
-      <circle cx="7.5" cy="17" r="1.5" />
-      <circle cx="16.5" cy="17" r="1.5" />
-    </svg>
-  );
-}
-
-function HomeIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-      <path d="M3 12l9-9 9 9" />
-      <path d="M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10" />
-    </svg>
-  );
-}
-
-function InvestIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-      <polyline points="22,7 13.5,15.5 8.5,10.5 2,17" />
-      <polyline points="16,7 22,7 22,13" />
+    <svg width={size} height={size} viewBox="0 0 40 40">
+      <g fill={color}>
+        <path d="M17 0 h6 v17 h-6 z" />
+        <path d="M23 17 h17 v6 h-17 z" />
+        <path d="M17 23 h6 v17 h-6 z" />
+        <path d="M0 17 h17 v6 h-17 z" />
+      </g>
     </svg>
   );
 }
@@ -86,592 +24,489 @@ function ChevronDown() {
   );
 }
 
-function LockIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <rect x="3" y="11" width="18" height="11" rx="2" />
-      <path d="M7 11V7a5 5 0 0110 0v4" />
-    </svg>
-  );
-}
-
 function SearchIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
       <circle cx="11" cy="11" r="8" />
       <line x1="21" y1="21" x2="16.65" y2="16.65" />
     </svg>
   );
 }
 
-function ArrowRight() {
+function ChevronRight({ size = 14, color = "#0060a9" }: { size?: number; color?: string }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <line x1="5" y1="12" x2="19" y2="12" />
-      <polyline points="12 5 19 12 12 19" />
+    <svg width={size} height={size} viewBox="0 0 12 12" fill="none" stroke={color} strokeWidth="2">
+      <path d="M4 2l4 4-4 4" />
     </svg>
   );
 }
 
-/* ───────── NAV DATA ───────── */
-const navItems = [
-  {
-    label: "Credit Cards",
-    links: [
-      "Explore All Credit Cards",
-      "Chase Sapphire",
-      "Chase Freedom",
-      "Chase Slate",
-      "Ink Business Cards",
-      "Disney Visa Cards",
-      "Amazon Rewards Cards",
-      "Marriott Bonvoy",
-      "Southwest Airlines",
-      "United Airlines",
-      "IHG One Rewards",
-    ],
-  },
-  {
-    label: "Checking",
-    links: [
-      "Compare Checking Accounts",
-      "Chase Total Checking",
-      "Chase Secure Banking",
-      "Chase Premier Plus Checking",
-      "Chase Sapphire Checking",
-      "Chase College Checking",
-      "Chase First Banking",
-    ],
-  },
-  {
-    label: "Savings & CDs",
-    links: [
-      "Chase Savings",
-      "Chase Premier Savings",
-      "Certificates of Deposit",
-      "Savings Calculator",
-    ],
-  },
-  {
-    label: "Home Lending",
-    links: [
-      "Buy a Home",
-      "Refinance",
-      "Home Equity",
-      "Mortgage Rates",
-      "Mortgage Calculator",
-      "Affordable Lending Options",
-    ],
-  },
-  {
-    label: "Auto",
-    links: ["Finance a Car", "Refinance a Car", "Manage My Auto Loan"],
-  },
-  {
-    label: "Investing",
-    links: [
-      "J.P. Morgan Self-Directed Investing",
-      "J.P. Morgan Personal Advisors",
-      "J.P. Morgan Wealth Plan",
-      "Retirement",
-      "529 College Savings",
-    ],
-  },
-  {
-    label: "Business Banking",
-    links: [
-      "Business Checking",
-      "Business Credit Cards",
-      "Business Line of Credit",
-      "Business Lending",
-      "Chase for Business",
-    ],
-  },
-];
+function ArrowLeft() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  );
+}
 
-/* ───────── PRODUCT CARDS DATA ───────── */
-const productCards = [
-  {
-    icon: <CreditCardIcon />,
-    title: "Credit Cards",
-    description: "Find the right card for your spending habits. Earn rewards, cash back, and travel benefits.",
-    cta: "Compare credit cards",
-    highlight: "Earn up to 5% cash back",
-  },
-  {
-    icon: <BankIcon />,
-    title: "Checking Accounts",
-    description: "Manage your money with ease. Access 15,000+ ATMs and 4,700+ branches nationwide.",
-    cta: "Open an account",
-    highlight: "No minimum deposit to open",
-  },
-  {
-    icon: <SavingsIcon />,
-    title: "Savings",
-    description: "Grow your savings and earn competitive rates on CDs and savings accounts.",
-    cta: "Start saving",
-    highlight: "Earn 4.00% APY on CDs",
-  },
-  {
-    icon: <HomeIcon />,
-    title: "Home Lending",
-    description: "Whether buying or refinancing, find the mortgage that fits your needs.",
-    cta: "Explore mortgages",
-    highlight: "See today's rates",
-  },
-  {
-    icon: <CarIcon />,
-    title: "Auto Loans",
-    description: "Finance or refinance your vehicle with competitive rates and flexible terms.",
-    cta: "Get started",
-    highlight: "Quick pre-qualification",
-  },
-  {
-    icon: <InvestIcon />,
-    title: "Investing by J.P. Morgan",
-    description: "Build your financial future with self-directed investing or expert guidance.",
-    cta: "Start investing",
-    highlight: "$0 commission trades",
-  },
-];
+function ArrowRightNav() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+      <path d="M9 18l6-6-6-6" />
+    </svg>
+  );
+}
 
-/* ───────── FOOTER DATA ───────── */
-const footerSections = [
-  {
-    title: "About Chase",
-    links: ["About Us", "Careers", "Diversity & Inclusion", "Media Center", "Sustainability"],
-  },
-  {
-    title: "Products & Services",
-    links: ["Credit Cards", "Checking Accounts", "Savings Accounts", "Mortgages", "Auto Financing", "Investing"],
-  },
-  {
-    title: "Resources",
-    links: ["Account Security", "Privacy & Security", "Report Fraud", "ATM & Branch Locator", "Contact Us"],
-  },
-  {
-    title: "Legal",
-    links: ["Privacy Policy", "Terms of Use", "Accessibility", "Site Map", "AdChoices"],
-  },
-];
+/* ───── Category Icons ───── */
+function CheckingIcon() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
+      <rect x="6" y="12" width="36" height="24" rx="2" />
+      <line x1="6" y1="20" x2="42" y2="20" />
+      <rect x="10" y="28" width="12" height="4" rx="1" />
+    </svg>
+  );
+}
+
+function InvestmentsIcon() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
+      <polyline points="8,36 18,24 26,30 40,14" />
+      <polyline points="34,14 40,14 40,20" />
+      <line x1="8" y1="40" x2="40" y2="40" />
+    </svg>
+  );
+}
+
+function CreditCardsIcon() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
+      <rect x="4" y="14" width="32" height="22" rx="2" />
+      <rect x="12" y="10" width="32" height="22" rx="2" />
+      <line x1="12" y1="18" x2="44" y2="18" />
+    </svg>
+  );
+}
+
+function TravelIcon() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
+      <path d="M24 4L40 18H32V38H16V18H8L24 4Z" />
+      <path d="M8 44L18 38M40 44L30 38" />
+      <circle cx="24" cy="24" r="4" />
+    </svg>
+  );
+}
+
+function HomeLoansIcon() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
+      <path d="M6 24L24 8L42 24" />
+      <path d="M10 22V40H20V30H28V40H38V22" />
+    </svg>
+  );
+}
+
+function AutoIcon() {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
+      <path d="M8 30h32M8 30a3 3 0 01-3-3v-4a3 3 0 013-3h2l3-6h22l3 6h2a3 3 0 013 3v4a3 3 0 01-3 3" />
+      <circle cx="14" cy="30" r="3" />
+      <circle cx="34" cy="30" r="3" />
+    </svg>
+  );
+}
 
 /* ═══════════════════════════════════════════════
-   MAIN PAGE
+   MAIN PAGE - Chase Personal Banking
    ═══════════════════════════════════════════════ */
 export default function ChaseMirror() {
   const [activeNav, setActiveNav] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState(0);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-  const tabs = ["For You", "Credit Cards", "Checking", "Savings & CDs", "Lending", "Investing"];
+  const navLinks = [
+    "Checking",
+    "Savings & CDs",
+    "Credit cards",
+    "Home loans",
+    "Auto",
+    "Investing by J.P. Morgan",
+    "Education & goals",
+    "Travel",
+  ];
+
+  const categories = [
+    { icon: <CheckingIcon />, label: "Checking" },
+    { icon: <InvestmentsIcon />, label: "Investments" },
+    { icon: <CreditCardsIcon />, label: "Credit cards" },
+    { icon: <TravelIcon />, label: "Travel" },
+    { icon: <HomeLoansIcon />, label: "Home loans" },
+    { icon: <AutoIcon />, label: "Auto" },
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* ─── UTILITY BAR ─── */}
-      <div className="utility-bar">
-        <div className="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
-          <div className="flex gap-6">
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-xs">Personal</a>
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-xs font-semibold border-b border-gray-600">Business</a>
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-xs">Commercial</a>
-          </div>
-          <div className="flex gap-4 items-center">
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-xs flex items-center gap-1">
-              <SearchIcon /> Search
+    <div className="min-h-screen flex flex-col bg-white">
+
+      {/* ─── TOP UTILITY BAR ─── */}
+      <div style={{ borderBottom: "1px solid #e0e0e0" }}>
+        <div className="max-w-[1280px] mx-auto px-6 flex justify-between items-center h-[40px]">
+          <div className="flex items-center gap-6">
+            <a
+              href="#"
+              className="text-[13px] text-black font-medium"
+              style={{ borderBottom: "2px solid black", paddingBottom: "1px" }}
+            >
+              Personal
             </a>
-            <span className="text-gray-300">|</span>
-            <a href="#" className="text-gray-600 hover:text-gray-900 text-xs">Espa&ntilde;ol</a>
+            <a href="#" className="text-[13px] text-gray-600 hover:text-black">Business</a>
+            <a href="#" className="text-[13px] text-gray-600 hover:text-black">Commercial</a>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-[13px] text-gray-700 hover:text-black">Schedule a meeting</a>
+            <a href="#" className="text-[13px] text-gray-700 hover:text-black flex items-center gap-1">
+              Customer service <ChevronDown />
+            </a>
+            <a href="#" className="text-[13px] text-gray-700 hover:text-black">Espa&ntilde;ol</a>
+            <a href="#" className="hover:opacity-70">
+              <SearchIcon />
+            </a>
           </div>
         </div>
       </div>
 
-      {/* ─── MAIN HEADER ─── */}
-      <header className="main-header">
-        <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 py-3">
-            <ChaseLogo size={36} />
-            <span className="text-xl font-bold" style={{ color: "#0060a9" }}>Chase</span>
-          </a>
+      {/* ─── LOGO ROW ─── */}
+      <div style={{ borderBottom: "1px solid #e0e0e0" }}>
+        <div className="max-w-[1280px] mx-auto px-6 flex items-center h-[64px]">
+          <div className="flex items-center gap-2">
+            <span className="text-[26px] font-bold tracking-wide" style={{ color: "#1a1a1a", letterSpacing: "0.06em" }}>
+              CHASE
+            </span>
+            <ChaseLogoMark size={30} />
+          </div>
+        </div>
+      </div>
 
-          {/* Navigation */}
-          <nav className="hidden lg:flex items-center">
-            {navItems.map((item, i) => (
+      {/* ─── NAVIGATION BAR ─── */}
+      <div
+        className="bg-white sticky top-0 z-50"
+        style={{ borderBottom: "1px solid #e0e0e0", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+      >
+        <div className="max-w-[1280px] mx-auto px-6">
+          <nav className="flex items-center">
+            {navLinks.map((link, i) => (
               <div
                 key={i}
-                className="nav-group relative"
+                className="relative"
                 onMouseEnter={() => setActiveNav(i)}
                 onMouseLeave={() => setActiveNav(null)}
               >
-                <a href="#" className={`nav-item flex items-center gap-1 ${activeNav === i ? "active" : ""}`}>
-                  {item.label} <ChevronDown />
+                <a
+                  href="#"
+                  className="block px-4 py-3.5 text-[14px] transition-colors hover:no-underline whitespace-nowrap"
+                  style={{
+                    color: activeNav === i ? "#0060a9" : "#333",
+                    borderBottom: activeNav === i ? "3px solid #0060a9" : "3px solid transparent",
+                    fontWeight: 400,
+                  }}
+                >
+                  {link}
                 </a>
-                {activeNav === i && (
-                  <div className="mega-menu" style={{ display: "block", left: "-200px", width: "600px" }}>
-                    <div className="grid grid-cols-2 gap-3">
-                      {item.links.map((link, j) => (
-                        <a
-                          key={j}
-                          href="#"
-                          className="text-sm text-gray-700 hover:text-blue-700 py-1.5 px-2 rounded hover:bg-blue-50 transition-colors"
-                        >
-                          {link}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </nav>
-
-          {/* Sign In */}
-          <div className="hidden lg:flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                placeholder="Username"
-                className="sign-in-input"
-                style={{ width: "130px" }}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="sign-in-input"
-                style={{ width: "130px" }}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button className="btn-primary flex items-center gap-1.5 text-sm py-2.5 px-5">
-              <LockIcon /> Sign in
-            </button>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-              {showMobileMenu ? (
-                <path d="M18 6L6 18M6 6l12 12" />
-              ) : (
-                <>
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <line x1="3" y1="12" x2="21" y2="12" />
-                  <line x1="3" y1="18" x2="21" y2="18" />
-                </>
-              )}
-            </svg>
-          </button>
         </div>
-
-        {/* Mobile menu */}
-        {showMobileMenu && (
-          <div className="lg:hidden border-t border-gray-200 bg-white">
-            <div className="px-6 py-4 space-y-4">
-              <div className="flex gap-2 mb-4">
-                <input type="text" placeholder="Username" className="sign-in-input flex-1" />
-                <input type="password" placeholder="Password" className="sign-in-input flex-1" />
-                <button className="btn-primary text-sm py-2 px-4">Sign in</button>
-              </div>
-              {navItems.map((item, i) => (
-                <div key={i}>
-                  <a href="#" className="block py-2 font-semibold text-gray-800">{item.label}</a>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </header>
+      </div>
 
       {/* ─── HERO SECTION ─── */}
-      <section className="hero-section flex items-center relative">
-        <div className="max-w-[1200px] mx-auto px-6 w-full relative z-10">
-          <div className="max-w-lg py-16">
-            <p className="text-blue-200 text-sm font-semibold tracking-wider uppercase mb-3">
-              Limited-time offer
-            </p>
-            <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Chase Sapphire Preferred<sup>&reg;</sup> Card
-            </h1>
-            <p className="text-blue-100 text-lg mb-2">
-              Earn 60,000 bonus points after you spend $4,000 on purchases in the first 3 months from account opening.
-            </p>
-            <p className="text-blue-200 text-sm mb-8">
-              That&apos;s $750 toward travel when you redeem through Chase Travel.
-            </p>
-            <div className="flex gap-4 flex-wrap">
-              <a href="#" className="btn-white">Learn more</a>
-              <a href="#" className="btn-secondary" style={{ borderColor: "white", color: "white" }}>
-                Apply now
+      <section
+        className="relative"
+        style={{
+          background: "linear-gradient(90deg, #003d7a 0%, #0060a9 40%, #1a8fe3 80%, #3ba0e6 100%)",
+          minHeight: "360px",
+        }}
+      >
+        {/* Blue bar top accent */}
+        <div className="absolute top-0 left-0 right-0 h-[4px]" style={{ backgroundColor: "#004b8d" }} />
+
+        <div className="max-w-[1280px] mx-auto px-6 flex items-center relative" style={{ minHeight: "360px" }}>
+          {/* Left: Promo content */}
+          <div className="flex-1 py-12 pr-8">
+            <div className="flex items-start gap-8">
+              <div>
+                <p className="text-white text-[18px] font-medium mb-1">Enjoy up to</p>
+                <p className="text-white text-[80px] font-bold leading-none" style={{ letterSpacing: "-2px" }}>
+                  $900
+                </p>
+              </div>
+              <div className="pt-2">
+                <h1 className="text-white text-[28px] font-bold leading-tight mb-3">
+                  New checking &amp; savings<br />customers
+                </h1>
+                <p className="text-white/90 text-[15px] leading-relaxed mb-6">
+                  Enjoy up to $900 when you open a Chase Total Checking<sup>®</sup> and Chase<br />
+                  Savings<sup>SM</sup> account with qualifying activities.
+                </p>
+                <a
+                  href="#"
+                  className="inline-block text-white text-[14px] font-semibold px-6 py-3 rounded hover:opacity-90 hover:no-underline transition-opacity"
+                  style={{ backgroundColor: "#117a37", border: "none" }}
+                >
+                  Open an account
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Sign-in card */}
+          <div
+            className="bg-white rounded-lg p-8 w-[340px] flex-shrink-0"
+            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}
+          >
+            <h2 className="text-[24px] font-bold mb-6" style={{ color: "#1a1a1a" }}>Welcome back</h2>
+
+            {/* Username */}
+            <div className="mb-5">
+              <label className="block text-[13px] text-gray-600 mb-1">Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full border-0 border-b-2 border-gray-300 py-2 text-[15px] outline-none focus:border-blue-600 bg-transparent"
+              />
+            </div>
+
+            {/* Password */}
+            <div className="mb-5">
+              <div className="flex justify-between items-center">
+                <label className="block text-[13px] text-gray-600 mb-1">Password</label>
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full border-0 border-b-2 border-gray-300 py-2 text-[15px] outline-none focus:border-blue-600 bg-transparent pr-14"
+                />
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 top-2 text-[13px] font-semibold cursor-pointer"
+                  style={{ color: "#0060a9" }}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            {/* Remember me + Use token */}
+            <div className="flex items-center justify-between mb-5">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 border-2 border-gray-400 rounded cursor-pointer"
+                />
+                <span className="text-[13px] text-gray-700">Remember me</span>
+              </label>
+              <a href="#" className="text-[13px] font-semibold flex items-center gap-0.5" style={{ color: "#0060a9" }}>
+                Use token <ChevronRight size={10} />
+              </a>
+            </div>
+
+            {/* Sign in button */}
+            <button
+              className="w-full text-white text-[16px] font-semibold rounded-full py-3 mb-5 cursor-pointer hover:opacity-90 transition-opacity"
+              style={{ backgroundColor: "#0060a9" }}
+            >
+              Sign in
+            </button>
+
+            {/* Links */}
+            <div className="flex flex-col gap-2">
+              <a href="#" className="text-[13px] font-medium flex items-center gap-0.5" style={{ color: "#0060a9" }}>
+                Forgot username/password? <ChevronRight size={10} />
+              </a>
+              <a href="#" className="text-[13px] font-medium flex items-center gap-0.5" style={{ color: "#0060a9" }}>
+                Not Enrolled? Sign Up Now. <ChevronRight size={10} />
               </a>
             </div>
           </div>
         </div>
-        {/* Decorative circles */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
-          <div
-            className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)" }}
-          />
-          <div
-            className="absolute right-[100px] top-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)" }}
-          />
-        </div>
       </section>
 
-      {/* ─── PROMOTIONAL BANNER ─── */}
-      <section className="bg-gray-50 py-4">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="promo-banner">
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 rounded-full p-2">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-white font-semibold">Chase was awarded &ldquo;Best National Bank&rdquo; by Bankrate for 2024-2025</p>
-                <p className="text-blue-200 text-sm">Recognized for outstanding products, competitive rates, and nationwide availability</p>
-              </div>
-            </div>
-            <a href="#" className="text-white font-semibold text-sm whitespace-nowrap flex items-center gap-1 hover:underline">
-              Learn more <ArrowRight />
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* ─── CHOOSE WHAT'S RIGHT SECTION ─── */}
+      <section className="py-14">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <h2 className="text-center text-[32px] font-light mb-10" style={{ color: "#1a1a1a" }}>
+            Choose what&apos;s right for you
+          </h2>
 
-      {/* ─── PRODUCT TABS & CARDS ─── */}
-      <section className="py-16">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-8">
-            <h2 className="section-heading">Explore Products</h2>
-            <p className="section-subheading">Find the right account or card for your financial needs</p>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex justify-center border-b border-gray-200 mb-10 overflow-x-auto">
-            {tabs.map((tab, i) => (
-              <button
+          {/* Category icons row */}
+          <div className="flex items-center justify-center gap-0">
+            {categories.map((cat, i) => (
+              <a
                 key={i}
-                className={`tab-button ${activeTab === i ? "active" : ""}`}
-                onClick={() => setActiveTab(i)}
+                href="#"
+                className="flex flex-col items-center gap-3 px-10 py-4 hover:no-underline group"
               >
-                {tab}
-              </button>
+                <div className="text-gray-500 group-hover:text-blue-700 transition-colors">
+                  {cat.icon}
+                </div>
+                <span className="text-[14px] group-hover:text-blue-700 transition-colors" style={{ color: "#0060a9" }}>
+                  {cat.label}
+                </span>
+              </a>
             ))}
           </div>
 
-          {/* Cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {productCards.map((card, i) => (
-              <div key={i} className="product-card flex flex-col">
-                <div className="product-icon bg-blue-50">{card.icon}</div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{card.title}</h3>
-                <p className="text-sm text-gray-600 mb-3 flex-1">{card.description}</p>
-                {card.highlight && (
-                  <p className="text-sm font-semibold text-green-700 mb-4">
-                    {card.highlight}
-                  </p>
-                )}
-                <a href="#" className="text-sm font-semibold flex items-center gap-1" style={{ color: "#0060a9" }}>
-                  {card.cta} <ArrowRight />
+          {/* Carousel dots */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <button className="p-1 cursor-pointer hover:opacity-70"><ArrowLeft /></button>
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: "#333" }} />
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: "#ccc" }} />
+            <button className="p-1 cursor-pointer hover:opacity-70"><ArrowRightNav /></button>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PROMO CARDS ROW ─── */}
+      <section className="pb-16">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+            {/* Card 1: J.P. Morgan Wealth Management */}
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#f5efe6" }}>
+              <div className="p-8">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-[22px] font-bold leading-tight mb-1" style={{ color: "#1a1a1a" }}>
+                      J.P. Morgan Wealth<br />Management
+                    </h3>
+                  </div>
+                  <div className="flex-shrink-0 ml-4">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                      <circle cx="20" cy="25" r="8" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
+                      <circle cx="35" cy="25" r="8" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
+                      <circle cx="27" cy="38" r="8" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-[14px] text-gray-700 mt-3 mb-5 leading-relaxed">
+                  Invest your way with J.P. Morgan. Whether you choose to work with a financial advisor or self-direct your investments.
+                </p>
+                <a href="#" className="text-[14px] font-semibold flex items-center gap-1" style={{ color: "#0060a9" }}>
+                  Get started <ChevronRight />
                 </a>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* ─── WHY CHASE SECTION ─── */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="section-heading">Why Chase?</h2>
-            <p className="section-subheading">America&apos;s largest bank with a commitment to serving you</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { number: "4,700+", label: "Branches nationwide", desc: "Bank in person at a location near you" },
-              { number: "15,000+", label: "Chase ATMs", desc: "Convenient access to your cash coast-to-coast" },
-              { number: "#1", label: "Most visited banking portal", desc: "Trusted digital experience for millions" },
-              { number: "24/7", label: "Customer support", desc: "We're here whenever you need us" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-4xl font-bold mb-2" style={{ color: "#0060a9" }}>{stat.number}</p>
-                <p className="font-semibold text-gray-900 mb-1">{stat.label}</p>
-                <p className="text-sm text-gray-600">{stat.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FEATURED OFFERS ─── */}
-      <section className="py-16">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2 className="section-heading mb-8">Featured Offers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Offer 1 */}
-            <div className="rounded-xl overflow-hidden border border-gray-200">
-              <div className="h-48 flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1a3c5e, #0060a9)" }}>
-                <div className="text-center text-white px-6">
-                  <p className="text-sm uppercase tracking-wider mb-2 text-blue-200">Chase Total Checking</p>
-                  <p className="text-3xl font-bold">$300</p>
-                  <p className="text-sm text-blue-200">New account bonus</p>
+            {/* Card 2: Chase High School Checking */}
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0060a9" }}>
+              <div className="p-8">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-[22px] font-bold leading-tight mb-1 text-white">
+                      Chase High School<br />Checking<sup>SM</sup>
+                    </h3>
+                  </div>
+                  <div className="flex-shrink-0 ml-4">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                      <circle cx="30" cy="30" r="20" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" fill="none" />
+                      <text x="30" y="35" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="18">$</text>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-bold text-lg mb-2">Open a Chase Total Checking account</h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  Enjoy a $300 bonus when you open a new Chase Total Checking account and set up direct deposit within 90 days.
+                <p className="text-[14px] text-white/80 mt-3 mb-5 leading-relaxed">
+                  Set your teen up for financial success with a checking account designed for ages 13-17.
                 </p>
-                <a href="#" className="btn-primary inline-block text-sm">Open an account</a>
+                <a href="#" className="text-[14px] font-semibold flex items-center gap-1 text-white hover:text-white">
+                  Learn more <ChevronRight color="white" />
+                </a>
               </div>
             </div>
-            {/* Offer 2 */}
-            <div className="rounded-xl overflow-hidden border border-gray-200">
-              <div className="h-48 flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0a2540, #1a8fe3)" }}>
-                <div className="text-center text-white px-6">
-                  <p className="text-sm uppercase tracking-wider mb-2 text-blue-200">Chase Savings</p>
-                  <p className="text-3xl font-bold">$200</p>
-                  <p className="text-sm text-blue-200">New savings bonus</p>
+
+            {/* Card 3: Chase Freedom */}
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#d32f2f" }}>
+              <div className="p-8">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-[22px] font-bold leading-tight mb-1 text-white">
+                      Chase<br />Freedom<sup>®</sup>
+                    </h3>
+                  </div>
+                  <div className="flex-shrink-0 ml-4">
+                    <div
+                      className="w-[70px] h-[44px] rounded-md flex items-center justify-center"
+                      style={{ background: "linear-gradient(135deg, #1565c0, #1976d2)" }}
+                    >
+                      <span className="text-white text-[8px] font-bold">VISA</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-bold text-lg mb-2">Grow your money with Chase Savings</h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  Earn a $200 bonus when you open a new Chase Savings account with qualifying activities within 90 days.
+                <p className="text-[14px] text-white/80 mt-3 mb-5 leading-relaxed">
+                  Earn unlimited 1.5% cash back on all purchases. No annual fee and no minimum to redeem.
                 </p>
-                <a href="#" className="btn-primary inline-block text-sm">Start saving</a>
+                <a href="#" className="text-[14px] font-semibold flex items-center gap-1 text-white hover:text-white">
+                  See details <ChevronRight color="white" />
+                </a>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── MOBILE APP BANNER ─── */}
-      <section className="py-16" style={{ background: "linear-gradient(135deg, #0a2540, #0060a9)" }}>
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="flex items-center justify-between flex-wrap gap-8">
-            <div className="max-w-lg">
-              <h2 className="text-white text-3xl font-bold mb-4">
-                Bank from almost anywhere with the Chase Mobile app
-              </h2>
-              <p className="text-blue-200 mb-6">
-                Manage your accounts, deposit checks, transfer money, pay bills, and more — all from your phone.
-              </p>
-              <div className="flex gap-4">
-                <a href="#" className="btn-white text-sm">Download on the App Store</a>
-                <a href="#" className="btn-white text-sm">Get it on Google Play</a>
-              </div>
-            </div>
-            <div className="flex items-center gap-6">
-              <div className="w-48 h-96 bg-white/10 rounded-3xl border-2 border-white/20 flex items-center justify-center">
-                <div className="text-center text-white/60">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                    <rect x="5" y="2" width="14" height="20" rx="2" />
-                    <line x1="12" y1="18" x2="12" y2="18.01" strokeWidth="2" />
-                  </svg>
-                  <p className="text-xs mt-2">Chase Mobile</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECURITY SECTION ─── */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <div className="max-w-2xl mx-auto">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0060a9" strokeWidth="1.5">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <path d="M9 12l2 2 4-4" />
-                </svg>
-              </div>
-            </div>
-            <h2 className="section-heading">Your security is our priority</h2>
-            <p className="text-gray-600 mt-4 mb-6">
-              We use advanced security measures to protect your accounts, including real-time fraud monitoring,
-              two-factor authentication, and zero liability protection.
-            </p>
-            <div className="flex justify-center gap-4 flex-wrap">
-              <a href="#" className="btn-secondary text-sm">Learn about security</a>
-              <a href="#" className="btn-secondary text-sm">Report suspicious activity</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="footer flex-shrink-0">
-        <div className="max-w-[1200px] mx-auto px-6">
-          {/* Footer top */}
-          <div className="flex items-center gap-3 mb-10">
-            <ChaseLogo size={28} color="#ffffff" />
-            <span className="text-white font-bold text-lg">Chase</span>
-          </div>
-
-          {/* Footer links */}
+      <footer style={{ backgroundColor: "#f5f5f5", borderTop: "1px solid #e0e0e0" }} className="mt-auto">
+        <div className="max-w-[1280px] mx-auto px-6 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            {footerSections.map((section, i) => (
+            {[
+              {
+                title: "About Chase",
+                links: ["About Us", "Careers", "Diversity & Inclusion", "Media Center", "Sustainability"],
+              },
+              {
+                title: "Products & Services",
+                links: ["Checking Accounts", "Savings Accounts", "Credit Cards", "Mortgages", "Auto Financing", "Investing"],
+              },
+              {
+                title: "Resources",
+                links: ["Account Security", "Privacy & Security", "Report Fraud", "ATM & Branch Locator", "Contact Us"],
+              },
+              {
+                title: "Legal",
+                links: ["Privacy Policy", "Terms of Use", "Accessibility", "Site Map", "AdChoices"],
+              },
+            ].map((section, i) => (
               <div key={i}>
-                <h4 className="footer-heading">{section.title}</h4>
+                <h4 className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-4">
+                  {section.title}
+                </h4>
                 <div className="flex flex-col gap-2.5">
                   {section.links.map((link, j) => (
-                    <a key={j} href="#">{link}</a>
+                    <a key={j} href="#" className="text-[13px] text-gray-600 hover:text-gray-900">{link}</a>
                   ))}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Social links */}
-          <div className="flex gap-6 mb-8">
-            {["Facebook", "Twitter", "Instagram", "YouTube", "LinkedIn"].map((social) => (
-              <a key={social} href="#" className="text-gray-400 hover:text-white text-sm">
-                {social}
-              </a>
-            ))}
-          </div>
-
-          {/* Footer bottom */}
-          <div className="footer-bottom">
+          <div className="border-t border-gray-300 pt-6">
             <div className="flex flex-wrap gap-4 mb-4">
-              <a href="#" className="text-xs">Privacy Policy</a>
-              <span className="text-gray-600">|</span>
-              <a href="#" className="text-xs">Terms of Use</a>
-              <span className="text-gray-600">|</span>
-              <a href="#" className="text-xs">Accessibility</a>
-              <span className="text-gray-600">|</span>
-              <a href="#" className="text-xs">CCPA / Do Not Sell My Info</a>
-              <span className="text-gray-600">|</span>
-              <a href="#" className="text-xs">AdChoices</a>
+              {["Privacy Policy", "Terms of Use", "Accessibility", "CCPA", "AdChoices"].map((link, i) => (
+                <span key={i} className="flex items-center gap-4">
+                  <a href="#" className="text-[12px] text-gray-600 hover:text-gray-900">{link}</a>
+                  {i < 4 && <span className="text-gray-300">|</span>}
+                </span>
+              ))}
             </div>
-            <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-500 mb-4">
-              <span>JPMorgan Chase Bank, N.A. Member FDIC</span>
-              <span>Equal Housing Lender</span>
-            </div>
-            <p className="text-xs text-gray-500 leading-relaxed">
-              &copy; 2025 JPMorgan Chase &amp; Co. All rights reserved. &ldquo;Chase&rdquo;, &ldquo;JPMorgan&rdquo;,
-              &ldquo;JPMorgan Chase&rdquo;, the JPMorgan Chase logo and the Octagon Symbol are trademarks of JPMorgan
-              Chase Bank, N.A. JPMorgan Chase Bank, N.A. is a wholly-owned subsidiary of JPMorgan Chase &amp; Co.
+            <p className="text-[11px] text-gray-500 leading-relaxed mb-2">
+              JPMorgan Chase Bank, N.A. Member FDIC. Equal Housing Lender.
             </p>
-            <p className="text-xs text-gray-500 mt-3 leading-relaxed">
-              Deposit products provided by JPMorgan Chase Bank, N.A. Member FDIC.
-              Equal Opportunity Lender.
+            <p className="text-[11px] text-gray-500 leading-relaxed">
+              &copy; 2025 JPMorgan Chase &amp; Co. All rights reserved.
             </p>
           </div>
         </div>

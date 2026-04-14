@@ -152,7 +152,7 @@ export default function ChaseMirror() {
 
       {/* ─── TOP UTILITY BAR ─── */}
       <div style={{ borderBottom: "1px solid #e0e0e0" }}>
-        <div className="max-w-[1280px] mx-auto px-6 flex justify-between items-center h-[40px]">
+        <div className="max-w-[1140px] mx-auto px-8 flex justify-between items-center h-[40px]">
           <div className="flex items-center gap-6">
             <a
               href="#"
@@ -179,7 +179,7 @@ export default function ChaseMirror() {
 
       {/* ─── LOGO ROW ─── */}
       <div style={{ borderBottom: "1px solid #e0e0e0" }}>
-        <div className="max-w-[1280px] mx-auto px-6 flex items-center h-[64px]">
+        <div className="max-w-[1140px] mx-auto px-8 flex items-center h-[64px]">
           <div className="flex items-center gap-2">
             <span className="text-[26px] font-bold tracking-wide" style={{ color: "#1a1a1a", letterSpacing: "0.06em" }}>
               CHASE
@@ -194,7 +194,7 @@ export default function ChaseMirror() {
         className="bg-white sticky top-0 z-50"
         style={{ borderBottom: "1px solid #e0e0e0", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
       >
-        <div className="max-w-[1280px] mx-auto px-6">
+        <div className="max-w-[1140px] mx-auto px-8">
           <nav className="flex items-center" style={{ gap: "0" }}>
             {navLinks.map((link, i) => (
               <div
@@ -232,7 +232,7 @@ export default function ChaseMirror() {
         {/* Blue bar top accent */}
         <div className="absolute top-0 left-0 right-0 h-[4px]" style={{ backgroundColor: "#004b8d" }} />
 
-        <div className="max-w-[1280px] mx-auto px-6 flex items-center relative" style={{ minHeight: "360px" }}>
+        <div className="max-w-[1140px] mx-auto px-8 flex items-center relative" style={{ minHeight: "380px" }}>
           {/* Left: Promo content */}
           <div className="flex-1 py-12 pr-8">
             <div className="flex items-start gap-8">
@@ -252,8 +252,16 @@ export default function ChaseMirror() {
                 </p>
                 <a
                   href="#"
-                  className="inline-block text-white text-[14px] font-semibold px-6 py-3 rounded hover:opacity-90 hover:no-underline transition-opacity"
-                  style={{ backgroundColor: "#117a37", border: "none" }}
+                  className="inline-block text-white text-[14px] font-semibold hover:no-underline transition-all"
+                  style={{
+                    backgroundColor: "#0d6e2d",
+                    border: "2px solid #0d6e2d",
+                    borderRadius: "8px",
+                    padding: "10px 24px",
+                    letterSpacing: "0.02em",
+                  }}
+                  onMouseOver={(e) => { e.currentTarget.style.backgroundColor = "#0b5c26"; e.currentTarget.style.borderColor = "#0b5c26"; }}
+                  onMouseOut={(e) => { e.currentTarget.style.backgroundColor = "#0d6e2d"; e.currentTarget.style.borderColor = "#0d6e2d"; }}
                 >
                   Open an account
                 </a>
@@ -263,8 +271,8 @@ export default function ChaseMirror() {
 
           {/* Right: Sign-in card */}
           <div
-            className="bg-white rounded-lg p-8 flex-shrink-0"
-            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: "320px" }}
+            className="bg-white flex-shrink-0"
+            style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.15)", width: "310px", padding: "28px 28px 24px", borderRadius: "4px" }}
           >
             <h2 className="text-[24px] font-bold mb-6" style={{ color: "#1a1a1a" }}>Welcome back</h2>
 
@@ -319,8 +327,17 @@ export default function ChaseMirror() {
 
             {/* Sign in button */}
             <button
-              className="w-full text-white text-[16px] font-semibold rounded-full py-3 mb-5 cursor-pointer hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: "#0060a9" }}
+              className="w-full text-white text-[16px] font-semibold cursor-pointer transition-all"
+              style={{
+                background: "linear-gradient(180deg, #0a74c2 0%, #0060a9 100%)",
+                borderRadius: "28px",
+                padding: "12px 0",
+                border: "none",
+                marginBottom: "16px",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.background = "linear-gradient(180deg, #085fa0 0%, #004d8a 100%)"; }}
+              onMouseOut={(e) => { e.currentTarget.style.background = "linear-gradient(180deg, #0a74c2 0%, #0060a9 100%)"; }}
             >
               Sign in
             </button>
@@ -340,7 +357,7 @@ export default function ChaseMirror() {
 
       {/* ─── CHOOSE WHAT'S RIGHT SECTION ─── */}
       <section className="py-14">
-        <div className="max-w-[1280px] mx-auto px-6">
+        <div className="max-w-[1140px] mx-auto px-8">
           <h2 className="text-center text-[32px] font-light mb-10" style={{ color: "#1a1a1a" }}>
             Choose what&apos;s right for you
           </h2>
@@ -376,7 +393,7 @@ export default function ChaseMirror() {
 
       {/* ─── PROMO CARDS ROW ─── */}
       <section className="pb-16">
-        <div className="max-w-[1280px] mx-auto px-6">
+        <div className="max-w-[1140px] mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "20px" }}>
 
             {/* Card 1: J.P. Morgan Wealth Management */}
@@ -467,7 +484,7 @@ export default function ChaseMirror() {
 
       {/* ─── FOOTER ─── */}
       <footer style={{ backgroundColor: "#f5f5f5", borderTop: "1px solid #e0e0e0" }} className="mt-auto">
-        <div className="max-w-[1280px] mx-auto px-6 py-10">
+        <div className="max-w-[1140px] mx-auto px-8 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             {[
               {

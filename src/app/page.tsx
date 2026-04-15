@@ -151,7 +151,7 @@ export default function ChaseMirror() {
           <nav style={{ display: "flex" }}>
             {navLinks.map((link, i) => (
               <div key={i} onMouseEnter={() => setActiveNav(i)} onMouseLeave={() => setActiveNav(null)}>
-                <a href="#" style={{
+                <a href={link === "Checking" ? "/checking" : link === "Credit cards" ? "/explore" : "#"} style={{
                   display: "block", padding: "12px 16px", fontSize: "14px", color: activeNav === i ? "#0060f0" : "#101820",
                   borderBottom: activeNav === i ? "3px solid #0b6efd" : "3px solid transparent", whiteSpace: "nowrap", textDecoration: "none",
                 }}>{link}</a>
@@ -185,7 +185,7 @@ export default function ChaseMirror() {
                 <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "14px", lineHeight: 1.6, marginBottom: "20px" }}>
                   Open a Chase Total Checking<sup>&reg;</sup> account with qualifying activities.
                 </p>
-                <a href="#" style={{
+                <a href="/checking" style={{
                   display: "inline-block", background: "#128842", color: "#fff", fontSize: "14px", fontWeight: 600,
                   padding: "8px 20px", borderRadius: "4px", textDecoration: "none",
                 }}>Open an account</a>
@@ -310,7 +310,7 @@ export default function ChaseMirror() {
               display: "flex", justifyContent: "center", gap: "12px", marginTop: "20px", flexWrap: "wrap",
             }}>
               {["Open a checking account", "Compare credit cards", "Mortgage rates", "Start investing"].map((suggestion, i) => (
-                <button key={i} onClick={() => router.push(`/explore?q=${encodeURIComponent(suggestion)}`)} style={{
+                <button key={i} onClick={() => { if (suggestion === "Open a checking account") { router.push("/checking"); } else { router.push(`/explore?q=${encodeURIComponent(suggestion)}`); } }} style={{
                   background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)",
                   borderRadius: "20px", padding: "8px 18px", color: "#fff", fontSize: "13px",
                   cursor: "pointer", fontFamily: "'Open Sans', sans-serif",
@@ -332,7 +332,7 @@ export default function ChaseMirror() {
           </h2>
           <div style={{ display: "flex", justifyContent: "center", gap: "72px", padding: "8px 0 16px" }}>
             {carouselItems.map((item, i) => (
-              <a key={i} href="#" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", textDecoration: "none" }}>
+              <a key={i} href={item.label === "Checking" ? "/checking" : item.label === "Credit cards" ? "/explore" : "#"} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", textDecoration: "none" }}>
                 {item.icon}
                 <span style={{ fontSize: "16px", color: "#005eb8" }}>{item.label}</span>
               </a>
@@ -371,7 +371,7 @@ export default function ChaseMirror() {
               <div style={{ padding: "24px" }}>
                 <h3 style={{ fontSize: "18px", fontWeight: 600, color: "#101820", marginBottom: "12px" }}>{card.title}</h3>
                 <p style={{ fontSize: "14px", color: "#414042", lineHeight: 1.6, marginBottom: "20px" }}>{card.desc}</p>
-                <a href="#" style={{
+                <a href={i === 0 ? "/checking" : "#"} style={{
                   display: "inline-block", background: card.btnBg, color: "#fff", fontSize: "14px", fontWeight: 600,
                   padding: "8px 24px", borderRadius: "4px", textDecoration: "none",
                 }}>{card.btn}</a>
@@ -399,7 +399,7 @@ export default function ChaseMirror() {
               <p style={{ fontSize: "16px", color: "#414042", lineHeight: 1.6, marginBottom: "20px" }}>
                 As a new Chase checking customer, get $125 when you open a Chase Secure Banking&#8480; account with qualifying transactions. Plus, <strong>$0 Monthly Service Fee for customers age 17&ndash;24.</strong>
               </p>
-              <a href="#" style={{ display: "inline-block", background: "#128842", color: "#fff", fontSize: "14px", padding: "6px 16px", borderRadius: "4px", textDecoration: "none" }}>Open now</a>
+              <a href="/checking" style={{ display: "inline-block", background: "#128842", color: "#fff", fontSize: "14px", padding: "6px 16px", borderRadius: "4px", textDecoration: "none" }}>Open now</a>
             </div>
           </div>
 

@@ -15,71 +15,85 @@ export default function CheckingPage() {
       {/* UTILITY BAR */}
       <div
         style={{
-          height: '40px',
+          height: '36px',
           borderBottom: '1px solid #c6c4c4',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingLeft: '20px',
-          paddingRight: '20px',
-          fontSize: '13px',
           backgroundColor: '#fff',
+          fontSize: '12px',
         }}
       >
-        <div style={{ display: 'flex', gap: '24px' }}>
-          <span>Personal</span>
-          <span>Business</span>
-          <span>Commercial</span>
-        </div>
-        <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-          <span>Schedule a meeting</span>
-          <span>Customer service</span>
-          <span>Español</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#101820"
-            strokeWidth="2"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="M21 21l-4.35-4.35" />
-          </svg>
+        <div
+          style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: '0 20px',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ display: 'flex', gap: '20px' }}>
+            <span>Personal</span>
+            <span>Business</span>
+            <span>Commercial</span>
+          </div>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <span>Schedule a meeting</span>
+            <span>Customer service</span>
+            <span>Español</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#101820"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+          </div>
         </div>
       </div>
 
       {/* CHASE LOGO BAR */}
       <div
         style={{
-          height: '80px',
-          display: 'flex',
-          alignItems: 'center',
-          paddingLeft: '20px',
-          paddingRight: '20px',
+          height: '60px',
           backgroundColor: '#fff',
           borderBottom: '1px solid #c6c4c4',
         }}
       >
-        <svg width="126" height="24" viewBox="0 0 126 24">
-          <text
-            x="0"
-            y="20"
-            fontFamily="'Helvetica Neue', Arial, sans-serif"
-            fontSize="24"
-            fontWeight="800"
-            letterSpacing="2"
-            fill="#101820"
-          >
-            CHASE
-          </text>
-          <g transform="translate(102, 2)">
-            <rect x="0" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
-            <rect x="7" y="0" width="3.5" height="8" rx="0.5" fill="#0060f0" />
-            <rect x="10.5" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
-            <rect x="7" y="10.5" width="3.5" height="8" rx="0.5" fill="#0060f0" />
-          </g>
-        </svg>
+        <div
+          style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: '0 20px',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <svg width="126" height="24" viewBox="0 0 126 24">
+            <text
+              x="0"
+              y="20"
+              fontFamily="'Helvetica Neue', Arial, sans-serif"
+              fontSize="24"
+              fontWeight="800"
+              letterSpacing="2"
+              fill="#101820"
+            >
+              CHASE
+            </text>
+            <g transform="translate(102, 2)">
+              <rect x="0" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
+              <rect x="7" y="0" width="3.5" height="8" rx="0.5" fill="#0060f0" />
+              <rect x="10.5" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
+              <rect x="7" y="10.5" width="3.5" height="8" rx="0.5" fill="#0060f0" />
+            </g>
+          </svg>
+        </div>
       </div>
 
       {/* NAV BAR - STICKY */}
@@ -90,32 +104,39 @@ export default function CheckingPage() {
           zIndex: 100,
           backgroundColor: '#fff',
           borderBottom: '1px solid #c6c4c4',
-          display: 'flex',
-          gap: '40px',
-          paddingLeft: '20px',
-          paddingRight: '20px',
-          height: '56px',
-          alignItems: 'center',
         }}
       >
-        <span
+        <div
           style={{
-            borderBottom: '3px solid #0060f0',
-            paddingBottom: '16px',
-            color: '#0060f0',
-            fontWeight: '600',
-            fontSize: '15px',
+            maxWidth: '1200px',
+            margin: '0 auto',
+            padding: '0 20px',
+            display: 'flex',
+            gap: '28px',
+            height: '48px',
+            alignItems: 'center',
           }}
         >
-          Checking
-        </span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Savings & CDs</span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Credit cards</span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Home loans</span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Auto</span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Investing by J.P. Morgan</span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Education & goals</span>
-        <span style={{ fontSize: '15px', color: '#414042' }}>Travel</span>
+          <span
+            style={{
+              borderBottom: '3px solid #0060f0',
+              paddingBottom: '12px',
+              color: '#0060f0',
+              fontWeight: '600',
+              fontSize: '14px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Checking
+          </span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Savings & CDs</span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Credit cards</span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Home loans</span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Auto</span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Investing by J.P. Morgan</span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Education & goals</span>
+          <span style={{ fontSize: '14px', color: '#414042', whiteSpace: 'nowrap' }}>Travel</span>
+        </div>
       </div>
 
       {/* HERO SECTION */}
@@ -123,15 +144,15 @@ export default function CheckingPage() {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '60px 20px',
+          padding: '36px 20px',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
+          gap: '40px',
           alignItems: 'center',
         }}
       >
         {/* LEFT SIDE - BONUS GRAPHIC */}
-        <div style={{ position: 'relative', height: '300px' }}>
+        <div style={{ position: 'relative', height: '220px' }}>
           <svg
             width="100%"
             height="100%"
@@ -213,7 +234,7 @@ export default function CheckingPage() {
       <div
         style={{
           maxWidth: '1200px',
-          margin: '60px auto 0',
+          margin: '32px auto 0',
           paddingLeft: '20px',
           paddingRight: '20px',
         }}
@@ -255,7 +276,7 @@ export default function CheckingPage() {
       </div>
 
       {/* TAB CONTENT */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 20px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '36px 20px' }}>
         {/* ALL TAB */}
         {activeTab === 'all' && (
           <div>
@@ -265,7 +286,7 @@ export default function CheckingPage() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: '30px',
-                marginBottom: '80px',
+                marginBottom: '48px',
               }}
             >
               {/* Card 1: Chase Total Checking */}
@@ -920,8 +941,8 @@ export default function CheckingPage() {
       <div
         style={{
           backgroundColor: '#f9f9f9',
-          padding: '80px 20px',
-          marginTop: '40px',
+          padding: '48px 20px',
+          marginTop: '24px',
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -930,7 +951,7 @@ export default function CheckingPage() {
               fontSize: '28px',
               fontWeight: '700',
               textAlign: 'center',
-              marginBottom: '60px',
+              marginBottom: '40px',
             }}
           >
             Experience seamless banking with Chase

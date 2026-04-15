@@ -2,123 +2,62 @@
 
 import { useState } from "react";
 
-/* ───── Chase Logo Mark ───── */
-function ChaseLogoMark({ size = 30, color = "#0060a9" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 40 40">
-      <g fill={color}>
-        <path d="M17 0 h6 v17 h-6 z" />
-        <path d="M23 17 h17 v6 h-17 z" />
-        <path d="M17 23 h6 v17 h-6 z" />
-        <path d="M0 17 h17 v6 h-17 z" />
-      </g>
-    </svg>
-  );
-}
+/* ─── Figma Asset URLs ─── */
+const assets = {
+  heroBg: "https://www.figma.com/api/mcp/asset/2ce0d4d1-d3f7-4bad-a810-ba404745e009",
+  enjoy400: "https://www.figma.com/api/mcp/asset/54677981-f015-4a19-970e-c774f496810f",
+  card1: "https://www.figma.com/api/mcp/asset/65ebf3aa-675e-45ee-93a8-4439b338da16",
+  card2: "https://www.figma.com/api/mcp/asset/b3b2395b-2b4f-46a3-9364-6f6afd1e432b",
+  card3: "https://www.figma.com/api/mcp/asset/cd514986-4eee-4b98-93c4-5b88a0d053cc",
+  bonus125: "https://www.figma.com/api/mcp/asset/b8edf51e-5009-4983-96f8-92f60a0d608e",
+  bonus1000: "https://www.figma.com/api/mcp/asset/7df02662-9b1e-4db7-81dc-f676ec0686ae",
+  bonus500: "https://www.figma.com/api/mcp/asset/5df9d6b2-dde1-4702-8b1e-bd2cc485dbb3",
+  logo: "https://www.figma.com/api/mcp/asset/427330a8-4e6f-483d-a912-f3c66cb95fdd",
+  searchIcon: "https://www.figma.com/api/mcp/asset/e4b30ce9-39f8-4cc8-98e3-247fc6ba64db",
+  chevron: "https://www.figma.com/api/mcp/asset/f8bd1504-7e8d-4f6f-beb1-905bcc062bde",
+  iconBriefcase: "https://www.figma.com/api/mcp/asset/ddae4b4f-378f-4f39-a2bf-aecf5248c630",
+  iconCard: "https://www.figma.com/api/mcp/asset/8db8d255-1dc3-4bd9-8032-3b612bd014cf",
+  iconCheck: "https://www.figma.com/api/mcp/asset/1f82e8e2-5e5f-465f-bc43-be2e2edd2a33",
+  iconPlane: "https://www.figma.com/api/mcp/asset/30b7e34f-81ee-4406-a6f0-02a18c5a501a",
+  iconPiggy: "https://www.figma.com/api/mcp/asset/09e7c9be-9ef3-465e-b8e2-38b75a7adfab",
+  iconHome: "https://www.figma.com/api/mcp/asset/9e9430ac-b3ca-4f0b-8a0c-b1b9e7f5f5f5",
+};
 
+/* ─── Chevron SVGs ─── */
 function ChevronDown() {
   return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M3 4.5l3 3 3-3" />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#101820" strokeWidth="2">
+      <path d="M4 6l4 4 4-4" />
     </svg>
   );
 }
 
-function SearchIcon() {
+function ChevronRight({ color = "#0060f0", size = 14 }: { color?: string; size?: number }) {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </svg>
-  );
-}
-
-function ChevronRight({ size = 14, color = "#0060a9" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 12 12" fill="none" stroke={color} strokeWidth="2">
-      <path d="M4 2l4 4-4 4" />
+    <svg width={size} height={size} viewBox="0 0 14 14" fill="none" stroke={color} strokeWidth="2">
+      <path d="M5 2l5 5-5 5" />
     </svg>
   );
 }
 
 function ArrowLeft() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#005eb8" strokeWidth="2">
       <path d="M15 18l-6-6 6-6" />
     </svg>
   );
 }
 
-function ArrowRightNav() {
+function ArrowRight() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#005eb8" strokeWidth="2">
       <path d="M9 18l6-6-6-6" />
     </svg>
   );
 }
 
-/* ───── Category Icons ───── */
-function CheckingIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
-      <rect x="6" y="12" width="36" height="24" rx="2" />
-      <line x1="6" y1="20" x2="42" y2="20" />
-      <rect x="10" y="28" width="12" height="4" rx="1" />
-    </svg>
-  );
-}
-
-function InvestmentsIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
-      <polyline points="8,36 18,24 26,30 40,14" />
-      <polyline points="34,14 40,14 40,20" />
-      <line x1="8" y1="40" x2="40" y2="40" />
-    </svg>
-  );
-}
-
-function CreditCardsIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
-      <rect x="4" y="14" width="32" height="22" rx="2" />
-      <rect x="12" y="10" width="32" height="22" rx="2" />
-      <line x1="12" y1="18" x2="44" y2="18" />
-    </svg>
-  );
-}
-
-function TravelIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
-      <path d="M24 4L40 18H32V38H16V18H8L24 4Z" />
-      <path d="M8 44L18 38M40 44L30 38" />
-      <circle cx="24" cy="24" r="4" />
-    </svg>
-  );
-}
-
-function HomeLoansIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
-      <path d="M6 24L24 8L42 24" />
-      <path d="M10 22V40H20V30H28V40H38V22" />
-    </svg>
-  );
-}
-
-function AutoIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#333" strokeWidth="1.5">
-      <path d="M8 30h32M8 30a3 3 0 01-3-3v-4a3 3 0 013-3h2l3-6h22l3 6h2a3 3 0 013 3v4a3 3 0 01-3 3" />
-      <circle cx="14" cy="30" r="3" />
-      <circle cx="34" cy="30" r="3" />
-    </svg>
-  );
-}
-
 /* ═══════════════════════════════════════════════
-   MAIN PAGE - Chase Personal Banking
+   MAIN PAGE - Chase Personal Banking (from Figma)
    ═══════════════════════════════════════════════ */
 export default function ChaseMirror() {
   const [activeNav, setActiveNav] = useState<number | null>(null);
@@ -128,89 +67,76 @@ export default function ChaseMirror() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const navLinks = [
-    "Checking",
-    "Savings & CDs",
-    "Credit cards",
-    "Home loans",
-    "Auto",
-    "Investing by J.P. Morgan",
-    "Education & goals",
-    "Travel",
+    "Checking", "Savings & CDs", "Credit cards", "Home loans",
+    "Auto", "Investing by J.P. Morgan", "Education & goals", "Travel",
   ];
 
-  const categories = [
-    { icon: <CheckingIcon />, label: "Checking" },
-    { icon: <InvestmentsIcon />, label: "Investments" },
-    { icon: <CreditCardsIcon />, label: "Credit cards" },
-    { icon: <TravelIcon />, label: "Travel" },
-    { icon: <HomeLoansIcon />, label: "Home loans" },
-    { icon: <AutoIcon />, label: "Auto" },
+  const carouselItems = [
+    { label: "Business", icon: assets.iconBriefcase },
+    { label: "Credit cards", icon: assets.iconCard },
+    { label: "Checking", icon: assets.iconCheck },
+    { label: "Travel", icon: assets.iconPlane },
+    { label: "Savings", icon: assets.iconPiggy },
+    { label: "Home loans", icon: assets.iconHome },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col" style={{ fontFamily: "'Open Sans', sans-serif" }}>
 
-      {/* ─── TOP UTILITY BAR ─── */}
-      <div style={{ borderBottom: "1px solid #e0e0e0" }}>
-        <div className="max-w-[1140px] mx-auto px-8 flex justify-between items-center h-[40px]">
-          <div className="flex items-center gap-6">
-            <a
-              href="#"
-              className="text-[13px] text-black font-medium"
-              style={{ borderBottom: "2px solid black", paddingBottom: "1px" }}
-            >
+      {/* ═══ TOP UTILITY BAR ═══ */}
+      <div style={{ borderBottom: "1px solid #c6c4c4" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 0", display: "flex", justifyContent: "space-between", alignItems: "center", height: "40px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <a href="#" style={{ fontSize: "13px", color: "#101820", fontWeight: 400, borderBottom: "2px solid #101820", paddingBottom: "1px" }}>
               Personal
             </a>
-            <a href="#" className="text-[13px] text-gray-600 hover:text-black">Business</a>
-            <a href="#" className="text-[13px] text-gray-600 hover:text-black">Commercial</a>
+            <a href="#" style={{ fontSize: "13px", color: "#717171" }}>Business</a>
+            <a href="#" style={{ fontSize: "13px", color: "#717171" }}>Commercial</a>
           </div>
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-[13px] text-gray-700 hover:text-black">Schedule a meeting</a>
-            <a href="#" className="text-[13px] text-gray-700 hover:text-black flex items-center gap-1">
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <a href="#" style={{ fontSize: "13px", color: "#414042" }}>Schedule a meeting</a>
+            <a href="#" style={{ fontSize: "13px", color: "#414042", display: "flex", alignItems: "center", gap: "4px" }}>
               Customer service <ChevronDown />
             </a>
-            <a href="#" className="text-[13px] text-gray-700 hover:text-black">Espa&ntilde;ol</a>
-            <a href="#" className="hover:opacity-70">
-              <SearchIcon />
+            <a href="#" style={{ fontSize: "13px", color: "#414042" }}>Espa&ntilde;ol</a>
+            <a href="#" style={{ display: "flex" }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#414042" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
             </a>
           </div>
         </div>
       </div>
 
-      {/* ─── LOGO ROW ─── */}
-      <div style={{ borderBottom: "1px solid #e0e0e0" }}>
-        <div className="max-w-[1140px] mx-auto px-8 flex items-center h-[64px]">
-          <div className="flex items-center gap-2">
-            <span className="text-[26px] font-bold tracking-wide" style={{ color: "#1a1a1a", letterSpacing: "0.06em" }}>
-              CHASE
-            </span>
-            <ChaseLogoMark size={30} />
-          </div>
+      {/* ═══ LOGO ROW ═══ */}
+      <div style={{ borderBottom: "1px solid #c6c4c4" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", alignItems: "center", height: "56px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={assets.logo} alt="Chase" style={{ height: "24px" }} />
         </div>
       </div>
 
-      {/* ─── NAVIGATION BAR ─── */}
-      <div
-        className="bg-white sticky top-0 z-50"
-        style={{ borderBottom: "1px solid #e0e0e0", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
-      >
-        <div className="max-w-[1140px] mx-auto px-8">
-          <nav className="flex items-center" style={{ gap: "0" }}>
+      {/* ═══ NAVIGATION ═══ */}
+      <div style={{ borderBottom: "1px solid #c6c4c4", position: "sticky", top: 0, zIndex: 50, background: "#fff" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <nav style={{ display: "flex", alignItems: "center", gap: "0" }}>
             {navLinks.map((link, i) => (
               <div
                 key={i}
-                className="relative"
                 onMouseEnter={() => setActiveNav(i)}
                 onMouseLeave={() => setActiveNav(null)}
               >
                 <a
                   href="#"
-                  className="block text-[14px] transition-colors hover:no-underline whitespace-nowrap"
                   style={{
-                    color: activeNav === i ? "#0060a9" : "#333",
-                    borderBottom: activeNav === i ? "3px solid #0060a9" : "3px solid transparent",
+                    display: "block",
+                    padding: "12px 16px",
+                    fontSize: "14px",
                     fontWeight: 400,
-                    padding: "14px 20px",
+                    color: activeNav === i ? "#0060f0" : "#101820",
+                    borderBottom: activeNav === i ? "3px solid #0b6efd" : "3px solid transparent",
+                    whiteSpace: "nowrap",
+                    textDecoration: "none",
                   }}
                 >
                   {link}
@@ -221,88 +147,89 @@ export default function ChaseMirror() {
         </div>
       </div>
 
-      {/* ─── HERO SECTION ─── */}
-      <section
-        className="relative"
-        style={{
-          background: "linear-gradient(90deg, #003d7a 0%, #0060a9 40%, #1a8fe3 80%, #3ba0e6 100%)",
-          minHeight: "360px",
-        }}
-      >
-        {/* Blue bar top accent */}
-        <div className="absolute top-0 left-0 right-0 h-[4px]" style={{ backgroundColor: "#004b8d" }} />
+      {/* ═══ HERO SECTION ═══ */}
+      <section style={{ position: "relative", minHeight: "400px", overflow: "hidden" }}>
+        {/* Background image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={assets.heroBg}
+          alt=""
+          style={{
+            position: "absolute",
+            top: 0, left: 0,
+            width: "100%", height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
+          }}
+        />
 
-        <div className="max-w-[1140px] mx-auto px-8 flex items-center relative" style={{ minHeight: "380px" }}>
-          {/* Left: Promo content */}
-          <div className="flex-1 py-12 pr-8">
-            <div className="flex items-start gap-8">
-              <div>
-                <p className="text-white text-[18px] font-medium mb-1">Enjoy up to</p>
-                <p className="text-white text-[80px] font-bold leading-none" style={{ letterSpacing: "-2px" }}>
-                  $900
-                </p>
-              </div>
-              <div className="pt-2">
-                <h1 className="text-white text-[28px] font-bold leading-tight mb-3">
-                  New checking &amp; savings<br />customers
-                </h1>
-                <p className="text-white/90 text-[15px] leading-relaxed mb-6">
-                  Enjoy up to $900 when you open a Chase Total Checking<sup>®</sup> and Chase<br />
-                  Savings<sup>SM</sup> account with qualifying activities.
-                </p>
-                <a
-                  href="#"
-                  className="inline-block text-white text-[14px] font-semibold hover:no-underline transition-all"
-                  style={{
-                    backgroundColor: "#0d6e2d",
-                    border: "2px solid #0d6e2d",
-                    borderRadius: "8px",
-                    padding: "10px 24px",
-                    letterSpacing: "0.02em",
-                  }}
-                  onMouseOver={(e) => { e.currentTarget.style.backgroundColor = "#0b5c26"; e.currentTarget.style.borderColor = "#0b5c26"; }}
-                  onMouseOut={(e) => { e.currentTarget.style.backgroundColor = "#0d6e2d"; e.currentTarget.style.borderColor = "#0d6e2d"; }}
-                >
-                  Open an account
-                </a>
-              </div>
-            </div>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1, display: "flex", alignItems: "flex-start", minHeight: "400px", paddingTop: "40px", paddingBottom: "40px" }}>
+          {/* Left: Hero promo content — overlaid on the image */}
+          <div style={{ flex: 1, paddingRight: "40px" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={assets.enjoy400}
+              alt="Enjoy up to $900"
+              style={{ maxWidth: "480px", width: "100%" }}
+            />
           </div>
 
           {/* Right: Sign-in card */}
-          <div
-            className="bg-white flex-shrink-0"
-            style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.15)", width: "310px", padding: "28px 28px 24px", borderRadius: "4px" }}
-          >
-            <h2 className="text-[24px] font-bold mb-6" style={{ color: "#1a1a1a" }}>Welcome back</h2>
+          <div style={{
+            width: "340px",
+            flexShrink: 0,
+            background: "#fff",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            padding: "28px 17px 24px",
+          }}>
+            <h2 style={{ fontSize: "24px", fontWeight: 400, color: "#414042", marginBottom: "24px" }}>
+              Welcome back
+            </h2>
 
             {/* Username */}
-            <div className="mb-5">
-              <label className="block text-[13px] text-gray-600 mb-1">Username</label>
+            <div style={{ marginBottom: "16px" }}>
+              <label style={{ display: "block", fontSize: "14px", color: "#414042", marginBottom: "4px" }}>Username</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full border-0 border-b-2 border-gray-300 py-2 text-[15px] outline-none focus:border-blue-600 bg-transparent"
+                style={{
+                  width: "100%",
+                  border: "none",
+                  borderBottom: "1px solid #8c8e90",
+                  padding: "8px 0",
+                  fontSize: "16px",
+                  outline: "none",
+                  background: "transparent",
+                  fontFamily: "inherit",
+                }}
               />
             </div>
 
             {/* Password */}
-            <div className="mb-5">
-              <div className="flex justify-between items-center">
-                <label className="block text-[13px] text-gray-600 mb-1">Password</label>
-              </div>
-              <div className="relative">
+            <div style={{ marginBottom: "16px" }}>
+              <label style={{ display: "block", fontSize: "14px", color: "#414042", marginBottom: "4px" }}>Password</label>
+              <div style={{ position: "relative" }}>
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full border-0 border-b-2 border-gray-300 py-2 text-[15px] outline-none focus:border-blue-600 bg-transparent pr-14"
+                  style={{
+                    width: "100%",
+                    border: "none",
+                    borderBottom: "1px solid #8c8e90",
+                    padding: "8px 0",
+                    fontSize: "16px",
+                    outline: "none",
+                    background: "transparent",
+                    paddingRight: "50px",
+                    fontFamily: "inherit",
+                  }}
                 />
                 <button
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 top-2 text-[13px] font-semibold cursor-pointer"
-                  style={{ color: "#0060a9" }}
+                  style={{ position: "absolute", right: 0, top: "8px", fontSize: "12px", fontWeight: 600, color: "#0060f0", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit" }}
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -310,228 +237,249 @@ export default function ChaseMirror() {
             </div>
 
             {/* Remember me + Use token */}
-            <div className="flex items-center justify-between mb-5">
-              <label className="flex items-center gap-2 cursor-pointer">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 border-2 border-gray-400 rounded cursor-pointer"
+                  style={{ width: "20px", height: "20px", accentColor: "#0060f0", cursor: "pointer" }}
                 />
-                <span className="text-[13px] text-gray-700">Remember me</span>
+                <span style={{ fontSize: "12px", color: "#414042" }}>Remember me</span>
               </label>
-              <a href="#" className="text-[13px] font-semibold flex items-center gap-0.5" style={{ color: "#0060a9" }}>
-                Use token <ChevronRight size={10} />
+              <a href="#" style={{ fontSize: "12px", fontWeight: 600, color: "#0060f0", display: "flex", alignItems: "center", gap: "2px" }}>
+                Use token <ChevronRight size={12} />
               </a>
             </div>
 
             {/* Sign in button */}
-            <button
-              className="w-full text-white text-[16px] font-semibold cursor-pointer transition-all"
-              style={{
-                background: "linear-gradient(180deg, #0a74c2 0%, #0060a9 100%)",
-                borderRadius: "28px",
-                padding: "12px 0",
-                border: "none",
-                marginBottom: "16px",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
-              onMouseOver={(e) => { e.currentTarget.style.background = "linear-gradient(180deg, #085fa0 0%, #004d8a 100%)"; }}
-              onMouseOut={(e) => { e.currentTarget.style.background = "linear-gradient(180deg, #0a74c2 0%, #0060a9 100%)"; }}
-            >
+            <button style={{
+              width: "100%",
+              background: "#0060f0",
+              color: "#fff",
+              fontSize: "16px",
+              fontWeight: 600,
+              border: "none",
+              borderRadius: "5px",
+              padding: "8px 0",
+              cursor: "pointer",
+              marginBottom: "16px",
+              fontFamily: "inherit",
+            }}>
               Sign in
             </button>
 
             {/* Links */}
-            <div className="flex flex-col gap-2">
-              <a href="#" className="text-[13px] font-medium flex items-center gap-0.5" style={{ color: "#0060a9" }}>
-                Forgot username/password? <ChevronRight size={10} />
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <a href="#" style={{ fontSize: "12px", color: "#0060f0", display: "flex", alignItems: "center", gap: "2px" }}>
+                Forgot username/password? <ChevronRight size={12} />
               </a>
-              <a href="#" className="text-[13px] font-medium flex items-center gap-0.5" style={{ color: "#0060a9" }}>
-                Not Enrolled? Sign Up Now. <ChevronRight size={10} />
+              <a href="#" style={{ fontSize: "12px", color: "#0060f0", display: "flex", alignItems: "center", gap: "2px" }}>
+                Not Enrolled? Sign Up Now. <ChevronRight size={12} />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── CHOOSE WHAT'S RIGHT SECTION ─── */}
-      <section className="py-14">
-        <div className="max-w-[1140px] mx-auto px-8">
-          <h2 className="text-center text-[32px] font-light mb-10" style={{ color: "#1a1a1a" }}>
+      {/* ═══ CHOOSE WHAT'S RIGHT ═══ */}
+      <section style={{ padding: "32px 0 0" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ textAlign: "center", fontSize: "32px", fontWeight: 700, color: "#101820", marginBottom: "0" }}>
             Choose what&apos;s right for you
           </h2>
 
-          {/* Category icons row */}
-          <div className="flex items-center justify-center" style={{ gap: "48px" }}>
-            {categories.map((cat, i) => (
-              <a
-                key={i}
-                href="#"
-                className="flex flex-col items-center hover:no-underline group"
-                style={{ gap: "12px", padding: "8px 0" }}
-              >
-                <div className="text-gray-500 group-hover:text-blue-700 transition-colors">
-                  {cat.icon}
+          {/* Carousel */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "80px", padding: "20px 0" }}>
+            {carouselItems.map((item, i) => (
+              <a key={i} href="#" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", textDecoration: "none" }}>
+                <div style={{ width: "48px", height: "48px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.icon} alt={item.label} style={{ width: "48px", height: "48px" }} />
                 </div>
-                <span className="text-[14px] group-hover:text-blue-700 transition-colors whitespace-nowrap" style={{ color: "#0060a9" }}>
-                  {cat.label}
-                </span>
+                <span style={{ fontSize: "16px", color: "#005eb8", whiteSpace: "nowrap" }}>{item.label}</span>
               </a>
             ))}
           </div>
 
           {/* Carousel dots */}
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <button className="p-1 cursor-pointer hover:opacity-70"><ArrowLeft /></button>
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: "#333" }} />
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: "#ccc" }} />
-            <button className="p-1 cursor-pointer hover:opacity-70"><ArrowRightNav /></button>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", paddingBottom: "24px" }}>
+            <button style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}><ArrowLeft /></button>
+            <div style={{ width: "17px", height: "17px", borderRadius: "50%", background: "#005eb8" }} />
+            <div style={{ width: "17px", height: "17px", borderRadius: "50%", background: "#fff", border: "2px solid #005eb8" }} />
+            <button style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}><ArrowRight /></button>
           </div>
         </div>
       </section>
 
-      {/* ─── PROMO CARDS ROW ─── */}
-      <section className="pb-16">
-        <div className="max-w-[1140px] mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "20px" }}>
+      {/* ═══ PROMO CARDS ═══ */}
+      <section style={{ background: "#fff" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
-            {/* Card 1: J.P. Morgan Wealth Management */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#f5efe6", minHeight: "240px" }}>
-              <div style={{ padding: "28px 28px 24px" }}>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-[20px] font-bold leading-tight" style={{ color: "#1a1a1a" }}>
-                      J.P. Morgan Wealth<br />Management
-                    </h3>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                      <circle cx="22" cy="24" r="10" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
-                      <circle cx="42" cy="24" r="10" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
-                      <circle cx="32" cy="40" r="10" stroke="#c4a67a" strokeWidth="1.5" fill="none" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-[14px] text-gray-700 leading-relaxed" style={{ marginTop: "16px", marginBottom: "20px" }}>
-                  Invest your way with J.P. Morgan. Whether you choose to work with a financial advisor or self-direct your investments.
-                </p>
-                <a href="#" className="text-[14px] font-semibold flex items-center gap-1" style={{ color: "#0060a9" }}>
-                  Get started <ChevronRight />
-                </a>
-              </div>
+          {/* Card Row 1: Three image cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px", marginBottom: "0" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <a href="#"><img src={assets.card1} alt="Get a $400 checking offer" style={{ width: "100%", borderRadius: "10px", display: "block" }} /></a>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <a href="#"><img src={assets.card2} alt="Refer friends, get rewarded" style={{ width: "100%", borderRadius: "10px", display: "block" }} /></a>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <a href="#"><img src={assets.card3} alt="That's up to $900 just for you" style={{ width: "100%", borderRadius: "10px", display: "block" }} /></a>
+          </div>
+
+          {/* Feature 1: $125 Bonus */}
+          <div style={{ display: "flex", alignItems: "center", gap: "32px", padding: "36px 0", borderBottom: "1px solid #e0e0e0" }}>
+            <div style={{ width: "500px", flexShrink: 0 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={assets.bonus125} alt="$125 bonus" style={{ width: "100%", borderRadius: "10px" }} />
             </div>
-
-            {/* Card 2: Chase High School Checking */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#0060a9", minHeight: "240px" }}>
-              <div style={{ padding: "28px 28px 24px" }}>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-[20px] font-bold leading-tight text-white">
-                      Chase High School<br />Checking<sup>SM</sup>
-                    </h3>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                      <circle cx="32" cy="32" r="24" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" fill="none" />
-                      <text x="32" y="38" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="22" fontWeight="bold">$</text>
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-[14px] text-white/80 leading-relaxed" style={{ marginTop: "16px", marginBottom: "20px" }}>
-                  Set your teen up for financial success with a checking account designed for ages 13-17.
-                </p>
-                <a href="#" className="text-[14px] font-semibold flex items-center gap-1 text-white hover:text-white">
-                  Learn more <ChevronRight color="white" />
-                </a>
-              </div>
+            <div>
+              <h3 style={{ fontSize: "28px", fontWeight: 600, color: "#414042", marginBottom: "12px" }}>
+                Start your money journey today
+              </h3>
+              <p style={{ fontSize: "16px", color: "#414042", lineHeight: 1.5, marginBottom: "20px" }}>
+                As a new Chase checking customer, get $125 when you open a Chase Secure Banking&#8480; account with qualifying transactions. Plus, $0 Monthly Service Fee for customers age 17&ndash;24.
+              </p>
+              <a href="#" style={{
+                display: "inline-block",
+                background: "#128842",
+                color: "#fff",
+                fontSize: "16px",
+                fontWeight: 400,
+                padding: "6px 16px",
+                borderRadius: "4px",
+                textDecoration: "none",
+              }}>
+                Open now
+              </a>
             </div>
+          </div>
 
-            {/* Card 3: Chase Freedom */}
-            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: "#c41230", minHeight: "240px" }}>
-              <div style={{ padding: "28px 28px 24px" }}>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-[20px] font-bold leading-tight text-white">
-                      Chase<br />Freedom<sup>®</sup>
-                    </h3>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    <div
-                      className="rounded-md flex items-center justify-center"
-                      style={{
-                        width: "80px",
-                        height: "50px",
-                        background: "linear-gradient(135deg, #2a5298, #1e3c72)",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-                      }}
-                    >
-                      <span className="text-white text-[10px] font-bold tracking-wider">VISA</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-[14px] text-white/85 leading-relaxed" style={{ marginTop: "16px", marginBottom: "20px" }}>
-                  Earn unlimited 1.5% cash back on all purchases. No annual fee and no minimum to redeem.
-                </p>
-                <a href="#" className="text-[14px] font-semibold flex items-center gap-1 text-white hover:text-white">
-                  See details <ChevronRight color="white" />
-                </a>
-              </div>
+          {/* Feature 2: $1,000 Cash Bonus */}
+          <div style={{ display: "flex", alignItems: "center", gap: "32px", padding: "36px 0", borderBottom: "1px solid #e0e0e0", flexDirection: "row-reverse" }}>
+            <div style={{ width: "500px", flexShrink: 0 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={assets.bonus1000} alt="Earn up to $1,000 cash bonus" style={{ width: "100%", borderRadius: "10px" }} />
+            </div>
+            <div>
+              <h3 style={{ fontSize: "28px", fontWeight: 600, color: "#414042", marginBottom: "12px" }}>
+                Commission-free online trades &ndash; plus a bonus
+              </h3>
+              <p style={{ fontSize: "16px", color: "#414042", lineHeight: 1.5, marginBottom: "20px" }}>
+                This is an invitation to get up to $1,000 when you open and fund a J.P. Morgan Self-Directed Investing account&mdash;an investing experience that puts you in control.
+              </p>
+              <a href="#" style={{
+                display: "inline-block",
+                background: "#128842",
+                color: "#fff",
+                fontSize: "16px",
+                fontWeight: 400,
+                padding: "6px 16px",
+                borderRadius: "4px",
+                textDecoration: "none",
+              }}>
+                Continue
+              </a>
+            </div>
+          </div>
+
+          {/* Feature 3: $500 Business */}
+          <div style={{ display: "flex", alignItems: "center", gap: "32px", padding: "36px 0" }}>
+            <div style={{ width: "500px", flexShrink: 0 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={assets.bonus500} alt="Earn up to $500" style={{ width: "100%", borderRadius: "10px" }} />
+            </div>
+            <div>
+              <h3 style={{ fontSize: "28px", fontWeight: 600, color: "#414042", marginBottom: "12px" }}>
+                Keep your business moving forward with Chase
+              </h3>
+              <p style={{ fontSize: "16px", color: "#414042", lineHeight: 1.5, marginBottom: "20px" }}>
+                Open a new Chase Business Complete Checking<sup>&reg;</sup> account with qualifying activities. For new business checking customers only.
+              </p>
+              <a href="#" style={{
+                display: "inline-block",
+                background: "#128842",
+                color: "#fff",
+                fontSize: "16px",
+                fontWeight: 400,
+                padding: "6px 16px",
+                borderRadius: "4px",
+                textDecoration: "none",
+              }}>
+                Open account
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── FOOTER ─── */}
-      <footer style={{ backgroundColor: "#f5f5f5", borderTop: "1px solid #e0e0e0" }} className="mt-auto">
-        <div className="max-w-[1140px] mx-auto px-8 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+      {/* ═══ FOOTER ═══ */}
+      <footer style={{ background: "#fff", borderTop: "1px solid #c6c4c4", marginTop: "40px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", paddingTop: "48px" }}>
+          {/* Logo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={assets.logo} alt="Chase" style={{ height: "24px", marginBottom: "32px" }} />
+
+          {/* Footer columns */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "24px", marginBottom: "40px" }}>
             {[
-              {
-                title: "About Chase",
-                links: ["About Us", "Careers", "Diversity & Inclusion", "Media Center", "Sustainability"],
-              },
-              {
-                title: "Products & Services",
-                links: ["Checking Accounts", "Savings Accounts", "Credit Cards", "Mortgages", "Auto Financing", "Investing"],
-              },
-              {
-                title: "Resources",
-                links: ["Account Security", "Privacy & Security", "Report Fraud", "ATM & Branch Locator", "Contact Us"],
-              },
-              {
-                title: "Legal",
-                links: ["Privacy Policy", "Terms of Use", "Accessibility", "Site Map", "AdChoices"],
-              },
-            ].map((section, i) => (
+              { title: "Checking Accounts", text: "Choose the checking account that works best for you. See our Chase Total Checking\u00AE offer for new customers." },
+              { title: "Savings Accounts & CDs", text: "It's never too early to begin saving. Open a savings account or open a Certificate of Deposit." },
+              { title: "Credit Cards", text: "Chase credit cards can help you buy the things you need. Many of our cards offer rewards that can be redeemed for cash back or travel-related perks." },
+              { title: "Mortgages", text: "Apply for a mortgage or refinance your mortgage with Chase. View today's mortgage rates or calculate what you can afford." },
+            ].map((col, i) => (
               <div key={i}>
-                <h4 className="text-[12px] font-bold text-gray-700 uppercase tracking-wider mb-4">
-                  {section.title}
-                </h4>
-                <div className="flex flex-col gap-2.5">
-                  {section.links.map((link, j) => (
-                    <a key={j} href="#" className="text-[13px] text-gray-600 hover:text-gray-900">{link}</a>
-                  ))}
-                </div>
+                <h4 style={{ fontSize: "12px", fontWeight: 600, color: "#101820", marginBottom: "8px" }}>{col.title}</h4>
+                <div style={{ width: "40px", height: "2px", background: "#676c6f", marginBottom: "12px" }} />
+                <p style={{ fontSize: "12px", color: "#414042", lineHeight: 1.5 }}>{col.text}</p>
               </div>
             ))}
           </div>
 
-          <div className="border-t border-gray-300 pt-6">
-            <div className="flex flex-wrap gap-4 mb-4">
-              {["Privacy Policy", "Terms of Use", "Accessibility", "CCPA", "AdChoices"].map((link, i) => (
-                <span key={i} className="flex items-center gap-4">
-                  <a href="#" className="text-[12px] text-gray-600 hover:text-gray-900">{link}</a>
-                  {i < 4 && <span className="text-gray-300">|</span>}
-                </span>
-              ))}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "24px", marginBottom: "40px" }}>
+            {[
+              { title: "Auto", text: "Chase Auto is here to help you get the right car. Apply for auto financing for a new or used car." },
+              { title: "Chase for Business", text: "With Chase for Business you'll receive guidance from a team of business professionals who specialize in helping improve cash flow." },
+              { title: "Sports & Entertainment", text: "Chase gives you access to unique sports, entertainment and culinary events through Chase Experiences." },
+              { title: "Chase Security Center", text: "Our suite of security features can help you protect your info, money and give you peace of mind." },
+            ].map((col, i) => (
+              <div key={i}>
+                <h4 style={{ fontSize: "12px", fontWeight: 600, color: "#101820", marginBottom: "8px" }}>{col.title}</h4>
+                <div style={{ width: "40px", height: "2px", background: "#676c6f", marginBottom: "12px" }} />
+                <p style={{ fontSize: "12px", color: "#414042", lineHeight: 1.5 }}>{col.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer bottom */}
+        <div style={{ borderTop: "1px solid #c6c4c4", padding: "16px 0 24px" }}>
+          <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", gap: "24px" }}>
+            <p style={{ fontSize: "12px", color: "#414042", lineHeight: 1.5, flex: 1 }}>
+              &ldquo;Chase,&rdquo; &ldquo;JPMorgan,&rdquo; &ldquo;JPMorgan Chase,&rdquo; the JPMorgan Chase logo and the Octagon Symbol are trademarks of JPMorgan Chase Bank, N.A. JPMorgan Chase Bank, N.A. is a wholly-owned subsidiary of JPMorgan Chase &amp; Co.
+            </p>
+            <p style={{ fontSize: "12px", color: "#414042", lineHeight: 1.5, flex: 1 }}>
+              Bank deposit accounts, such as checking and savings, may be subject to approval. Deposit products and related services are offered by JPMorgan Chase Bank, N.A. Member FDIC.
+            </p>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 16px", fontSize: "12px", marginBottom: "8px" }}>
+                {["J.P. Morgan", "JPMorganChase", "Media Center", "Careers", "Site Map"].map((link, i) => (
+                  <a key={i} href="#" style={{ color: "#0060f0", fontSize: "12px" }}>{link}</a>
+                ))}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 16px", fontSize: "12px", marginBottom: "8px" }}>
+                {["Privacy", "Security", "Terms of Use", "Accessibility", "AdChoices"].map((link, i) => (
+                  <a key={i} href="#" style={{ color: "#0060f0", fontSize: "12px" }}>{link}</a>
+                ))}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 16px", fontSize: "12px" }}>
+                <a href="#" style={{ color: "#0060f0", fontSize: "12px" }}>Give feedback</a>
+                <span style={{ color: "#414042", fontSize: "12px" }}>Member FDIC</span>
+                <span style={{ color: "#414042", fontSize: "12px" }}>Equal Housing Opportunity</span>
+              </div>
             </div>
-            <p className="text-[11px] text-gray-500 leading-relaxed mb-2">
-              JPMorgan Chase Bank, N.A. Member FDIC. Equal Housing Lender.
-            </p>
-            <p className="text-[11px] text-gray-500 leading-relaxed">
-              &copy; 2025 JPMorgan Chase &amp; Co. All rights reserved.
-            </p>
+          </div>
+          <div style={{ maxWidth: "1200px", margin: "12px auto 0" }}>
+            <p style={{ fontSize: "12px", color: "#414042" }}>&copy; 2026 JPMorgan Chase &amp; Co.</p>
           </div>
         </div>
       </footer>

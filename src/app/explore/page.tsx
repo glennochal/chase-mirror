@@ -104,16 +104,145 @@ const RemoveIcon = () => (
   </svg>
 );
 
+// SVG Credit Card Illustrations
+const FreedomUnlimitedCardSVG = () => (
+  <svg width="240" height="152" viewBox="0 0 240 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="240" height="152" rx="10" fill="url(#fuGrad)" />
+    <defs>
+      <linearGradient id="fuGrad" x1="0" y1="0" x2="240" y2="152">
+        <stop offset="0%" stopColor="#004e92" />
+        <stop offset="40%" stopColor="#0068b5" />
+        <stop offset="70%" stopColor="#0077cc" />
+        <stop offset="100%" stopColor="#4da6e8" />
+      </linearGradient>
+    </defs>
+    {/* Decorative swoosh */}
+    <path d="M0 100 Q60 60, 140 80 T240 50" stroke="rgba(255,255,255,0.12)" strokeWidth="40" fill="none" />
+    <path d="M0 120 Q80 70, 160 95 T240 70" stroke="rgba(255,255,255,0.08)" strokeWidth="30" fill="none" />
+    {/* Chase octagon */}
+    <g transform="translate(16, 16)">
+      <rect x="0" y="5" width="6" height="2.5" rx="0.5" fill="#fff" />
+      <rect x="5" y="0" width="2.5" height="6" rx="0.5" fill="#fff" />
+      <rect x="7.5" y="5" width="6" height="2.5" rx="0.5" fill="#fff" />
+      <rect x="5" y="7.5" width="2.5" height="6" rx="0.5" fill="#fff" />
+    </g>
+    {/* "freedom" text */}
+    <text x="34" y="28" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="400" fill="#fff" letterSpacing="0.5">freedom</text>
+    {/* "unlimited" text */}
+    <text x="34" y="42" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="300" fill="rgba(255,255,255,0.85)" letterSpacing="2">UNLIMITED</text>
+    {/* "NO ANNUAL FEE" badge */}
+    <text x="175" y="22" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle" transform="rotate(-15, 185, 22)">NO ANNUAL</text>
+    <text x="175" y="30" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle" transform="rotate(-15, 185, 30)">FEE</text>
+    {/* Chip */}
+    <rect x="28" y="60" width="28" height="22" rx="3" fill="#c4a44a" opacity="0.9" />
+    <line x1="28" y1="71" x2="56" y2="71" stroke="#b8963e" strokeWidth="0.5" />
+    <line x1="42" y1="60" x2="42" y2="82" stroke="#b8963e" strokeWidth="0.5" />
+    {/* Contactless icon */}
+    <g transform="translate(68, 64)">
+      <path d="M4 10 Q6 6, 8 10" stroke="#fff" strokeWidth="1" fill="none" />
+      <path d="M2 10 Q6 3, 10 10" stroke="#fff" strokeWidth="1" fill="none" />
+      <path d="M0 10 Q6 0, 12 10" stroke="#fff" strokeWidth="1" fill="none" />
+    </g>
+    {/* Cardholder name */}
+    <text x="28" y="108" fontFamily="Arial, sans-serif" fontSize="8" fontWeight="400" fill="rgba(255,255,255,0.8)" letterSpacing="1">D. BARRETT</text>
+    {/* VISA logo */}
+    <text x="195" y="138" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="700" fill="#fff" fontStyle="italic" letterSpacing="1">VISA</text>
+  </svg>
+);
+
+const FreedomFlexCardSVG = () => (
+  <svg width="240" height="152" viewBox="0 0 240 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="240" height="152" rx="10" fill="url(#ffGrad)" />
+    <defs>
+      <linearGradient id="ffGrad" x1="0" y1="0" x2="240" y2="152">
+        <stop offset="0%" stopColor="#005eb8" />
+        <stop offset="50%" stopColor="#0070cc" />
+        <stop offset="100%" stopColor="#60aae0" />
+      </linearGradient>
+    </defs>
+    {/* Decorative swoosh */}
+    <path d="M0 110 Q70 65, 150 85 T240 55" stroke="rgba(255,255,255,0.1)" strokeWidth="35" fill="none" />
+    {/* Chase octagon */}
+    <g transform="translate(16, 16)">
+      <rect x="0" y="5" width="6" height="2.5" rx="0.5" fill="#fff" />
+      <rect x="5" y="0" width="2.5" height="6" rx="0.5" fill="#fff" />
+      <rect x="7.5" y="5" width="6" height="2.5" rx="0.5" fill="#fff" />
+      <rect x="5" y="7.5" width="2.5" height="6" rx="0.5" fill="#fff" />
+    </g>
+    {/* "freedom" text */}
+    <text x="34" y="28" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="400" fill="#fff" letterSpacing="0.5">freedom</text>
+    {/* "FLEX" text */}
+    <text x="34" y="42" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="300" fill="rgba(255,255,255,0.85)" letterSpacing="2">FLEX</text>
+    {/* "NO ANNUAL FEE" badge */}
+    <text x="178" y="22" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle" transform="rotate(-15, 185, 22)">NO ANNUAL</text>
+    <text x="178" y="30" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle" transform="rotate(-15, 185, 30)">FEE</text>
+    {/* Dual chips (Mastercard style) */}
+    <circle cx="175" cy="75" r="14" fill="#999" opacity="0.6" />
+    <circle cx="195" cy="75" r="14" fill="#bbb" opacity="0.5" />
+    {/* Chip */}
+    <rect x="28" y="60" width="28" height="22" rx="3" fill="#c4a44a" opacity="0.9" />
+    <line x1="28" y1="71" x2="56" y2="71" stroke="#b8963e" strokeWidth="0.5" />
+    <line x1="42" y1="60" x2="42" y2="82" stroke="#b8963e" strokeWidth="0.5" />
+    {/* Cardholder name */}
+    <text x="28" y="108" fontFamily="Arial, sans-serif" fontSize="8" fontWeight="400" fill="rgba(255,255,255,0.8)" letterSpacing="1">D. BARRETT</text>
+    {/* Mastercard text */}
+    <text x="168" y="140" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="400" fill="rgba(255,255,255,0.7)" letterSpacing="1">MASTERCARD</text>
+  </svg>
+);
+
+const DisneyInspireCardSVG = () => (
+  <svg width="240" height="152" viewBox="0 0 240 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="240" height="152" rx="10" fill="url(#diGrad)" />
+    <defs>
+      <linearGradient id="diGrad" x1="0" y1="0" x2="240" y2="152">
+        <stop offset="0%" stopColor="#1a1a1a" />
+        <stop offset="100%" stopColor="#333" />
+      </linearGradient>
+    </defs>
+    {/* Disney text */}
+    <text x="24" y="32" fontFamily="Georgia, serif" fontSize="22" fontWeight="700" fill="#c4a44a" fontStyle="italic" letterSpacing="0.5">Disney</text>
+    {/* "INSPIRE" text */}
+    <text x="24" y="48" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="300" fill="#c4a44a" letterSpacing="3">INSPIRE</text>
+    {/* Mickey silhouette */}
+    <g transform="translate(145, 25)" fill="#c4a44a" opacity="0.85">
+      <circle cx="22" cy="50" r="22" />
+      <circle cx="8" cy="22" r="12" />
+      <circle cx="36" cy="22" r="12" />
+      {/* Walking pose arm */}
+      <ellipse cx="0" cy="50" rx="10" ry="4" transform="rotate(-30, 0, 50)" />
+      <ellipse cx="44" cy="50" rx="10" ry="4" transform="rotate(30, 44, 50)" />
+      {/* Legs */}
+      <rect x="12" y="68" width="8" height="16" rx="4" transform="rotate(-10, 12, 68)" />
+      <rect x="24" y="68" width="8" height="16" rx="4" transform="rotate(10, 24, 68)" />
+      {/* Shoes */}
+      <ellipse cx="10" cy="86" rx="8" ry="4" />
+      <ellipse cx="34" cy="86" rx="8" ry="4" />
+    </g>
+    {/* Cardholder name */}
+    <text x="24" y="112" fontFamily="Arial, sans-serif" fontSize="8" fontWeight="400" fill="#c4a44a" letterSpacing="1">LEE WHITE</text>
+    {/* VISA Signature */}
+    <text x="168" y="132" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="700" fill="#c4a44a" fontStyle="italic" letterSpacing="1">VISA</text>
+    <text x="168" y="142" fontFamily="Arial, sans-serif" fontSize="6" fontWeight="400" fill="#c4a44a" letterSpacing="1">Signature</text>
+  </svg>
+);
+
+// Card SVG map
+const cardSVGMap: Record<string, React.ReactNode> = {
+  'freedom-unlimited': <FreedomUnlimitedCardSVG />,
+  'freedom-flex': <FreedomFlexCardSVG />,
+  'disney-inspire': <DisneyInspireCardSVG />,
+};
+
 // Card Component
 const CreditCard = ({
+  cardId,
   title,
-  color,
   onApply,
   onDetails,
   badgeLabel,
 }: {
+  cardId: string;
   title: string;
-  color: string;
   onApply: () => void;
   onDetails: () => void;
   badgeLabel?: string;
@@ -123,38 +252,23 @@ const CreditCard = ({
       <div
         style={{
           position: 'absolute',
-          top: '12px',
-          right: '12px',
+          top: '-8px',
+          right: '20px',
           backgroundColor: badgeLabel === 'LIMITED TIME OFFER' ? '#ff6b35' : COLORS.primary,
           color: 'white',
-          padding: '6px 12px',
-          fontSize: '11px',
+          padding: '4px 12px',
+          fontSize: '10px',
           fontWeight: 'bold',
-          borderRadius: '4px',
+          borderRadius: '3px',
           zIndex: 10,
+          letterSpacing: '0.5px',
         }}
       >
         {badgeLabel}
       </div>
     )}
-    <div
-      style={{
-        background: color,
-        width: '100%',
-        height: '160px',
-        borderRadius: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'white',
-        fontSize: '14px',
-        fontWeight: 'bold',
-        fontFamily: 'Open Sans',
-        marginBottom: '16px',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-      {title}
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '14px' }}>
+      {cardSVGMap[cardId]}
     </div>
     <div style={{ textAlign: 'center' }}>
       <div
@@ -163,7 +277,7 @@ const CreditCard = ({
           fontWeight: 'bold',
           color: COLORS.text,
           fontFamily: 'Open Sans',
-          marginBottom: '16px',
+          marginBottom: '14px',
         }}
       >
         {title}
@@ -220,12 +334,12 @@ const CreditCard = ({
         </button>
       </div>
       <div style={{ fontSize: '12px', marginBottom: '8px' }}>
-        <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontFamily: 'Open Sans' }}>
-          Pricing &amp; Terms
+        <a href="#" style={{ color: COLORS.primary, textDecoration: 'underline', fontFamily: 'Open Sans' }}>
+          <sup style={{ fontSize: '8px' }}>&dagger;</sup>Pricing &amp; Terms
         </a>
       </div>
       <div style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
-        <StarIcon />
+        <span style={{ fontSize: '14px' }}>&#x2605;</span>
         <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontFamily: 'Open Sans' }}>
           Remove
         </a>
@@ -446,8 +560,8 @@ function ExplorePageInner() {
               {selectedCards.includes('freedom-unlimited') && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
+                    cardId="freedom-unlimited"
                     title="Chase Freedom Unlimited® Credit Card"
-                    color="linear-gradient(135deg, #0060f0 0%, #003ea1 100%)"
                     onApply={() => console.log('Apply Freedom Unlimited')}
                     onDetails={() => console.log('Details Freedom Unlimited')}
                     badgeLabel="LIMITED TIME OFFER"
@@ -459,8 +573,8 @@ function ExplorePageInner() {
               {selectedCards.includes('freedom-flex') && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
+                    cardId="freedom-flex"
                     title="Chase Freedom Flex℠ Credit Card"
-                    color="linear-gradient(135deg, #0077c8 0%, #004e92 100%)"
                     onApply={() => console.log('Apply Freedom Flex')}
                     onDetails={() => console.log('Details Freedom Flex')}
                   />
@@ -471,8 +585,8 @@ function ExplorePageInner() {
               {selectedCards.includes('disney-inspire') && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
+                    cardId="disney-inspire"
                     title="Disney® Inspire Visa® Card"
-                    color="linear-gradient(135deg, #1a1a4e 0%, #0a0a2e 100%)"
                     onApply={() => console.log('Apply Disney Inspire')}
                     onDetails={() => console.log('Details Disney Inspire')}
                     badgeLabel="SELECT OFFER"

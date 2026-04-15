@@ -13,15 +13,29 @@ const COLORS = {
   lightGray: '#f5f5f5',
   darkGray: '#414042',
   white: '#ffffff',
+  darkBg: '#101820',
 };
 
 // SVG Icons
-const ChaseLogoIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-    <rect width="40" height="40" fill="#0060f0" rx="4" />
-    <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="20" fontWeight="bold" fontFamily="Open Sans">
-      C
+const ChaseLogoIcon = ({ white = false }: { white?: boolean }) => (
+  <svg width="126" height="24" viewBox="0 0 126 24" fill="none">
+    <text
+      x="0"
+      y="20"
+      fontFamily="'Helvetica Neue', Arial, sans-serif"
+      fontSize="24"
+      fontWeight="800"
+      letterSpacing="2"
+      fill={white ? '#ffffff' : '#101820'}
+    >
+      CHASE
     </text>
+    <g transform="translate(102, 2)">
+      <rect x="0" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
+      <rect x="7" y="0" width="3.5" height="8" rx="0.5" fill="#0060f0" />
+      <rect x="10.5" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
+      <rect x="7" y="10.5" width="3.5" height="8" rx="0.5" fill="#0060f0" />
+    </g>
   </svg>
 );
 
@@ -104,16 +118,16 @@ const CreditCard = ({
   onDetails: () => void;
   badgeLabel?: string;
 }) => (
-  <div style={{ position: 'relative', marginBottom: '24px' }}>
+  <div style={{ position: 'relative', width: '100%' }}>
     {badgeLabel && (
       <div
         style={{
           position: 'absolute',
-          top: '-12px',
+          top: '12px',
           right: '12px',
           backgroundColor: badgeLabel === 'LIMITED TIME OFFER' ? '#ff6b35' : COLORS.primary,
           color: 'white',
-          padding: '4px 12px',
+          padding: '6px 12px',
           fontSize: '11px',
           fontWeight: 'bold',
           borderRadius: '4px',
@@ -126,69 +140,91 @@ const CreditCard = ({
     <div
       style={{
         background: color,
-        height: '100px',
-        borderRadius: '8px 8px 0 0',
+        width: '100%',
+        height: '160px',
+        borderRadius: '8px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         color: 'white',
-        fontSize: '18px',
+        fontSize: '14px',
         fontWeight: 'bold',
         fontFamily: 'Open Sans',
+        marginBottom: '16px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
       }}
     >
       {title}
     </div>
-    <div
-      style={{
-        padding: '16px',
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: '0 0 8px 8px',
-        borderTop: 'none',
-      }}
-    >
-      <button
-        onClick={onApply}
+    <div style={{ textAlign: 'center' }}>
+      <div
         style={{
-          width: '100%',
-          padding: '12px',
-          backgroundColor: COLORS.primary,
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
           fontSize: '14px',
           fontWeight: 'bold',
+          color: COLORS.text,
           fontFamily: 'Open Sans',
-          cursor: 'pointer',
-          marginBottom: '8px',
+          marginBottom: '16px',
         }}
       >
-        Apply Now
-      </button>
-      <button
-        onClick={onDetails}
+        {title}
+      </div>
+      <div
         style={{
-          width: '100%',
-          padding: '12px',
-          backgroundColor: 'transparent',
-          color: COLORS.primary,
-          border: `1px solid ${COLORS.primary}`,
-          borderRadius: '4px',
-          fontSize: '14px',
-          fontWeight: 'bold',
-          fontFamily: 'Open Sans',
-          cursor: 'pointer',
+          display: 'flex',
+          gap: '8px',
+          justifyContent: 'center',
           marginBottom: '12px',
         }}
       >
-        See details &gt;
-      </button>
-      <div style={{ fontSize: '12px', marginBottom: '12px' }}>
+        <button
+          onClick={onApply}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: COLORS.primary,
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            fontSize: '13px',
+            fontWeight: 'bold',
+            fontFamily: 'Open Sans',
+            cursor: 'pointer',
+            width: '118px',
+            height: '36px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Apply Now
+        </button>
+        <button
+          onClick={onDetails}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: 'transparent',
+            color: COLORS.primary,
+            border: `1px solid ${COLORS.primary}`,
+            borderRadius: '4px',
+            fontSize: '13px',
+            fontWeight: 'bold',
+            fontFamily: 'Open Sans',
+            cursor: 'pointer',
+            width: '136px',
+            height: '36px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          See details &gt;
+        </button>
+      </div>
+      <div style={{ fontSize: '12px', marginBottom: '8px' }}>
         <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontFamily: 'Open Sans' }}>
           Pricing &amp; Terms
         </a>
       </div>
-      <div style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+      <div style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
         <StarIcon />
         <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontFamily: 'Open Sans' }}>
           Remove
@@ -222,13 +258,13 @@ const ComparisonSection = ({
       {title}
     </h3>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-      <div style={{ fontSize: '14px', lineHeight: '1.6', color: COLORS.text, fontFamily: 'Open Sans' }}>
+      <div style={{ fontSize: '13px', lineHeight: '1.5', color: COLORS.text, fontFamily: 'Open Sans' }}>
         {cards.col1}
       </div>
-      <div style={{ fontSize: '14px', lineHeight: '1.6', color: COLORS.text, fontFamily: 'Open Sans' }}>
+      <div style={{ fontSize: '13px', lineHeight: '1.5', color: COLORS.text, fontFamily: 'Open Sans' }}>
         {cards.col2}
       </div>
-      <div style={{ fontSize: '14px', lineHeight: '1.6', color: COLORS.text, fontFamily: 'Open Sans' }}>
+      <div style={{ fontSize: '13px', lineHeight: '1.5', color: COLORS.text, fontFamily: 'Open Sans' }}>
         {cards.col3}
       </div>
     </div>
@@ -263,10 +299,13 @@ function ExplorePageInner() {
       {/* Utility Bar */}
       <div
         style={{
-          backgroundColor: '#f5f5f5',
-          padding: '12px 20px',
+          backgroundColor: COLORS.lightGray,
+          padding: '0 20px',
           fontSize: '12px',
           borderBottom: `1px solid ${COLORS.border}`,
+          height: '40px',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <div
@@ -276,9 +315,10 @@ function ExplorePageInner() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            width: '100%',
           }}
         >
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: 'flex', gap: '20px', fontFamily: 'Open Sans' }}>
             <a href="#" style={{ color: COLORS.primary, textDecoration: 'none' }}>
               Personal
             </a>
@@ -289,7 +329,7 @@ function ExplorePageInner() {
               Commercial
             </a>
           </div>
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontFamily: 'Open Sans' }}>
             <a href="#" style={{ color: COLORS.primary, textDecoration: 'none' }}>
               Schedule a meeting
             </a>
@@ -305,6 +345,8 @@ function ExplorePageInner() {
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               <SearchIcon />
@@ -314,8 +356,16 @@ function ExplorePageInner() {
       </div>
 
       {/* Chase Logo Bar */}
-      <div style={{ padding: '16px 20px', borderBottom: `1px solid ${COLORS.border}` }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div
+        style={{
+          padding: '0 20px',
+          borderBottom: `1px solid ${COLORS.border}`,
+          height: '56px',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
           <ChaseLogoIcon />
         </div>
       </div>
@@ -335,30 +385,31 @@ function ExplorePageInner() {
             display: 'flex',
             gap: '30px',
             fontSize: '14px',
+            fontFamily: 'Open Sans',
           }}
         >
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Checking
           </a>
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Savings &amp; CDs
           </a>
-          <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', padding: '16px 0', fontWeight: 'bold' }}>
+          <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', padding: '12px 16px', fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
             Credit cards
           </a>
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Home loans
           </a>
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Auto
           </a>
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Investing by J.P. Morgan
           </a>
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Education &amp; goals
           </a>
-          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '16px 0' }}>
+          <a href="#" style={{ color: COLORS.text, textDecoration: 'none', padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
             Travel
           </a>
         </div>
@@ -389,14 +440,14 @@ function ExplorePageInner() {
           </h1>
 
           {/* Comparison Grid Section */}
-          <div style={{ backgroundColor: COLORS.lightGray, padding: '40px 30px', borderRadius: '8px', marginBottom: '40px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+          <div style={{ marginBottom: '60px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
               {/* Card 1: Freedom Unlimited */}
               {selectedCards.includes('freedom-unlimited') && (
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
-                    title="Freedom Unlimited"
-                    color="linear-gradient(135deg, #0060f0 0%, #003d99 100%)"
+                    title="Chase Freedom Unlimited® Credit Card"
+                    color="linear-gradient(135deg, #0060f0 0%, #003ea1 100%)"
                     onApply={() => console.log('Apply Freedom Unlimited')}
                     onDetails={() => console.log('Details Freedom Unlimited')}
                     badgeLabel="LIMITED TIME OFFER"
@@ -406,10 +457,10 @@ function ExplorePageInner() {
 
               {/* Card 2: Freedom Flex */}
               {selectedCards.includes('freedom-flex') && (
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
-                    title="Freedom Flex"
-                    color="linear-gradient(135deg, #0060f0 0%, #0048b3 100%)"
+                    title="Chase Freedom Flex℠ Credit Card"
+                    color="linear-gradient(135deg, #0077c8 0%, #004e92 100%)"
                     onApply={() => console.log('Apply Freedom Flex')}
                     onDetails={() => console.log('Details Freedom Flex')}
                   />
@@ -418,10 +469,10 @@ function ExplorePageInner() {
 
               {/* Card 3: Disney Inspire */}
               {selectedCards.includes('disney-inspire') && (
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
-                    title="Disney Inspire"
-                    color="linear-gradient(135deg, #1a3a5c 0%, #0d1f3c 100%)"
+                    title="Disney® Inspire Visa® Card"
+                    color="linear-gradient(135deg, #1a1a4e 0%, #0a0a2e 100%)"
                     onApply={() => console.log('Apply Disney Inspire')}
                     onDetails={() => console.log('Details Disney Inspire')}
                     badgeLabel="SELECT OFFER"
@@ -586,270 +637,123 @@ function ExplorePageInner() {
             }}
           />
 
-          {/* Bottom Card Recommendations */}
-          <div style={{ marginBottom: '60px' }}>
-            <h2
+
+          {/* Browse by Category */}
+          <h2
+            style={{
+              fontSize: '24px',
+              fontWeight: 'bold',
+              textAlign: 'center',
+              marginBottom: '40px',
+              color: COLORS.text,
+              fontFamily: 'Open Sans',
+            }}
+          >
+            Browse credit cards by category
+          </h2>
+
+          {/* Category Icons */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '30px' }}>
+            <a
+              href="#"
               style={{
-                fontSize: '32px',
-                fontWeight: 'bold',
                 textAlign: 'center',
-                marginBottom: '48px',
+                textDecoration: 'none',
                 color: COLORS.text,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
               }}
             >
-              Ready to apply?
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '60px' }}>
-              <div
-                style={{
-                  padding: '24px',
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: '8px',
-                  textAlign: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    background: 'linear-gradient(135deg, #0060f0 0%, #003d99 100%)',
-                    height: '120px',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    marginBottom: '20px',
-                  }}
-                >
-                  Freedom Unlimited
-                </div>
-                <button
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    backgroundColor: COLORS.primary,
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    fontFamily: 'Open Sans',
-                    cursor: 'pointer',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Apply Now
-                </button>
-                <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontSize: '12px' }}>
-                  See details
-                </a>
-              </div>
-              <div
-                style={{
-                  padding: '24px',
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: '8px',
-                  textAlign: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    background: 'linear-gradient(135deg, #0060f0 0%, #0048b3 100%)',
-                    height: '120px',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    marginBottom: '20px',
-                  }}
-                >
-                  Freedom Flex
-                </div>
-                <button
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    backgroundColor: COLORS.primary,
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    fontFamily: 'Open Sans',
-                    cursor: 'pointer',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Apply Now
-                </button>
-                <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontSize: '12px' }}>
-                  See details
-                </a>
-              </div>
-              <div
-                style={{
-                  padding: '24px',
-                  border: `1px solid ${COLORS.border}`,
-                  borderRadius: '8px',
-                  textAlign: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    background: 'linear-gradient(135deg, #1a3a5c 0%, #0d1f3c 100%)',
-                    height: '120px',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    marginBottom: '20px',
-                  }}
-                >
-                  Disney Inspire
-                </div>
-                <button
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    backgroundColor: COLORS.primary,
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    fontFamily: 'Open Sans',
-                    cursor: 'pointer',
-                    marginBottom: '8px',
-                  }}
-                >
-                  Apply Now
-                </button>
-                <a href="#" style={{ color: COLORS.primary, textDecoration: 'none', fontSize: '12px' }}>
-                  See details
-                </a>
-              </div>
-            </div>
-
-            {/* Browse by Category */}
-            <h2
+              <RewardsIcon />
+              <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Rewards</span>
+            </a>
+            <a
+              href="#"
               style={{
-                fontSize: '24px',
-                fontWeight: 'bold',
                 textAlign: 'center',
-                marginBottom: '40px',
+                textDecoration: 'none',
                 color: COLORS.text,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
               }}
             >
-              Browse credit cards by category
-            </h2>
-
-            {/* Category Icons */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '30px' }}>
-              <a
-                href="#"
-                style={{
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <RewardsIcon />
-                <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Rewards</span>
-              </a>
-              <a
-                href="#"
-                style={{
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <AllCardsIcon />
-                <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>All Cards</span>
-              </a>
-              <a
-                href="#"
-                style={{
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <CashbackIcon />
-                <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Cashback</span>
-              </a>
-              <a
-                href="#"
-                style={{
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <BalanceTransferIcon />
-                <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Balance Transfer</span>
-              </a>
-              <a
-                href="#"
-                style={{
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <TravelIcon />
-                <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Travel</span>
-              </a>
-              <a
-                href="#"
-                style={{
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}
-              >
-                <BusinessIcon />
-                <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Business</span>
-              </a>
-            </div>
+              <AllCardsIcon />
+              <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>All Cards</span>
+            </a>
+            <a
+              href="#"
+              style={{
+                textAlign: 'center',
+                textDecoration: 'none',
+                color: COLORS.text,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+              }}
+            >
+              <CashbackIcon />
+              <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Cashback</span>
+            </a>
+            <a
+              href="#"
+              style={{
+                textAlign: 'center',
+                textDecoration: 'none',
+                color: COLORS.text,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+              }}
+            >
+              <BalanceTransferIcon />
+              <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Balance Transfer</span>
+            </a>
+            <a
+              href="#"
+              style={{
+                textAlign: 'center',
+                textDecoration: 'none',
+                color: COLORS.text,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+              }}
+            >
+              <TravelIcon />
+              <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Travel</span>
+            </a>
+            <a
+              href="#"
+              style={{
+                textAlign: 'center',
+                textDecoration: 'none',
+                color: COLORS.text,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+              }}
+            >
+              <BusinessIcon />
+              <span style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>Business</span>
+            </a>
           </div>
         </div>
       </div>
 
       {/* FOOTER */}
-      <footer style={{ backgroundColor: COLORS.text, color: 'white', padding: '40px 20px' }}>
+      <footer style={{ backgroundColor: COLORS.darkBg, color: 'white', padding: '40px 20px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Footer Logo */}
           <div style={{ marginBottom: '40px' }}>
-            <ChaseLogoIcon />
+            <ChaseLogoIcon white={true} />
           </div>
 
           {/* Footer Links Grid */}

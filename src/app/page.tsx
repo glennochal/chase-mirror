@@ -164,19 +164,19 @@ export default function ChaseMirror() {
       {/* ═══ HERO ═══ */}
       <section style={{
         background: "linear-gradient(135deg, #001d3d 0%, #003566 20%, #0060a9 45%, #1a8fe3 70%, #5fb8f0 85%, #7ecbf5 95%, #a8ddf8 100%)",
-        minHeight: "400px", position: "relative", overflow: "hidden",
+        position: "relative", overflow: "hidden",
       }}>
         {/* Decorative light streaks */}
         <div style={{ position: "absolute", top: 0, right: 0, width: "60%", height: "100%", background: "linear-gradient(120deg, transparent 0%, rgba(100,180,240,0.15) 30%, rgba(150,210,255,0.2) 50%, rgba(100,180,240,0.1) 70%, transparent 100%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: "20%", right: "10%", width: "40%", height: "60%", background: "radial-gradient(ellipse, rgba(150,210,255,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
 
-        <div style={{ ...cx, display: "flex", alignItems: "flex-start", position: "relative", zIndex: 1, minHeight: "400px", paddingTop: "50px", paddingBottom: "50px" }}>
+        <div style={{ ...cx, display: "flex", alignItems: "flex-start", position: "relative", zIndex: 1, paddingTop: "30px", paddingBottom: "30px" }}>
           {/* Hero content */}
           <div style={{ flex: 1, paddingRight: "60px" }}>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "32px" }}>
               <div>
                 <p style={{ color: "#fff", fontSize: "20px", fontWeight: 700, marginBottom: "4px" }}>Enjoy</p>
-                <p style={{ color: "#fff", fontSize: "96px", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-3px" }}>$400</p>
+                <p style={{ color: "#fff", fontSize: "72px", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-2px" }}>$400</p>
               </div>
               <div style={{ paddingTop: "8px" }}>
                 <h1 style={{ color: "#fff", fontSize: "28px", fontWeight: 700, lineHeight: 1.2, marginBottom: "12px" }}>

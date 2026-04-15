@@ -190,39 +190,44 @@ const FreedomFlexCardSVG = () => (
   </svg>
 );
 
-const DisneyInspireCardSVG = () => (
+const SlateCardSVG = () => (
   <svg width="240" height="152" viewBox="0 0 240 152" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="240" height="152" rx="10" fill="url(#diGrad)" />
+    <rect width="240" height="152" rx="10" fill="url(#slGrad)" />
     <defs>
-      <linearGradient id="diGrad" x1="0" y1="0" x2="240" y2="152">
-        <stop offset="0%" stopColor="#1a1a1a" />
-        <stop offset="100%" stopColor="#333" />
+      <linearGradient id="slGrad" x1="0" y1="0" x2="240" y2="152">
+        <stop offset="0%" stopColor="#004c6d" />
+        <stop offset="40%" stopColor="#00627a" />
+        <stop offset="100%" stopColor="#007a8a" />
       </linearGradient>
     </defs>
-    {/* Disney text */}
-    <text x="24" y="32" fontFamily="Georgia, serif" fontSize="22" fontWeight="700" fill="#c4a44a" fontStyle="italic" letterSpacing="0.5">Disney</text>
-    {/* "INSPIRE" text */}
-    <text x="24" y="48" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="300" fill="#c4a44a" letterSpacing="3">INSPIRE</text>
-    {/* Mickey silhouette */}
-    <g transform="translate(145, 25)" fill="#c4a44a" opacity="0.85">
-      <circle cx="22" cy="50" r="22" />
-      <circle cx="8" cy="22" r="12" />
-      <circle cx="36" cy="22" r="12" />
-      {/* Walking pose arm */}
-      <ellipse cx="0" cy="50" rx="10" ry="4" transform="rotate(-30, 0, 50)" />
-      <ellipse cx="44" cy="50" rx="10" ry="4" transform="rotate(30, 44, 50)" />
-      {/* Legs */}
-      <rect x="12" y="68" width="8" height="16" rx="4" transform="rotate(-10, 12, 68)" />
-      <rect x="24" y="68" width="8" height="16" rx="4" transform="rotate(10, 24, 68)" />
-      {/* Shoes */}
-      <ellipse cx="10" cy="86" rx="8" ry="4" />
-      <ellipse cx="34" cy="86" rx="8" ry="4" />
+    {/* Subtle pattern overlay */}
+    <path d="M0 90 Q80 50, 160 75 T240 45" stroke="rgba(255,255,255,0.06)" strokeWidth="40" fill="none" />
+    {/* Chase octagon */}
+    <g transform="translate(16, 16)">
+      <rect x="0" y="5" width="6" height="2.5" rx="0.5" fill="#fff" />
+      <rect x="5" y="0" width="2.5" height="6" rx="0.5" fill="#fff" />
+      <rect x="7.5" y="5" width="6" height="2.5" rx="0.5" fill="#fff" />
+      <rect x="5" y="7.5" width="2.5" height="6" rx="0.5" fill="#fff" />
+    </g>
+    {/* "SLATE" text */}
+    <text x="80" y="42" fontFamily="Arial, sans-serif" fontSize="28" fontWeight="300" fill="#fff" letterSpacing="6">SLATE</text>
+    {/* "NO ANNUAL FEE" badge */}
+    <text x="185" y="22" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle" transform="rotate(-15, 185, 22)">NO ANNUAL</text>
+    <text x="185" y="30" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle" transform="rotate(-15, 185, 30)">FEE</text>
+    {/* Chip */}
+    <rect x="28" y="60" width="28" height="22" rx="3" fill="#c4a44a" opacity="0.9" />
+    <line x1="28" y1="71" x2="56" y2="71" stroke="#b8963e" strokeWidth="0.5" />
+    <line x1="42" y1="60" x2="42" y2="82" stroke="#b8963e" strokeWidth="0.5" />
+    {/* Contactless icon */}
+    <g transform="translate(68, 64)">
+      <path d="M4 10 Q6 6, 8 10" stroke="#fff" strokeWidth="1" fill="none" />
+      <path d="M2 10 Q6 3, 10 10" stroke="#fff" strokeWidth="1" fill="none" />
+      <path d="M0 10 Q6 0, 12 10" stroke="#fff" strokeWidth="1" fill="none" />
     </g>
     {/* Cardholder name */}
-    <text x="24" y="112" fontFamily="Arial, sans-serif" fontSize="8" fontWeight="400" fill="#c4a44a" letterSpacing="1">LEE WHITE</text>
-    {/* VISA Signature */}
-    <text x="168" y="132" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="700" fill="#c4a44a" fontStyle="italic" letterSpacing="1">VISA</text>
-    <text x="168" y="142" fontFamily="Arial, sans-serif" fontSize="6" fontWeight="400" fill="#c4a44a" letterSpacing="1">Signature</text>
+    <text x="28" y="108" fontFamily="Arial, sans-serif" fontSize="8" fontWeight="400" fill="rgba(255,255,255,0.8)" letterSpacing="1">D. BARRETT</text>
+    {/* VISA logo */}
+    <text x="195" y="138" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="700" fill="#fff" fontStyle="italic" letterSpacing="1">VISA</text>
   </svg>
 );
 
@@ -230,7 +235,7 @@ const DisneyInspireCardSVG = () => (
 const cardSVGMap: Record<string, React.ReactNode> = {
   'freedom-unlimited': <FreedomUnlimitedCardSVG />,
   'freedom-flex': <FreedomFlexCardSVG />,
-  'disney-inspire': <DisneyInspireCardSVG />,
+  'slate': <SlateCardSVG />,
 };
 
 // Card Component
@@ -254,8 +259,8 @@ const CreditCard = ({
           position: 'absolute',
           top: '-8px',
           right: '20px',
-          backgroundColor: badgeLabel === 'LIMITED TIME OFFER' ? '#ff6b35' : COLORS.primary,
-          color: 'white',
+          backgroundColor: badgeLabel === 'LIMITED TIME OFFER' ? '#f5c518' : badgeLabel === 'NEW OFFER' ? '#f5c518' : COLORS.primary,
+          color: (badgeLabel === 'LIMITED TIME OFFER' || badgeLabel === 'NEW OFFER') ? '#101820' : 'white',
           padding: '4px 12px',
           fontSize: '10px',
           fontWeight: 'bold',
@@ -400,7 +405,7 @@ function ExplorePageInner() {
   const [selectedCards, setSelectedCards] = useState<string[]>([
     'freedom-unlimited',
     'freedom-flex',
-    'disney-inspire',
+    'slate',
   ]);
 
   const removeCard = (cardId: string) => {
@@ -581,15 +586,15 @@ function ExplorePageInner() {
                 </div>
               )}
 
-              {/* Card 3: Disney Inspire */}
-              {selectedCards.includes('disney-inspire') && (
+              {/* Card 3: Slate */}
+              {selectedCards.includes('slate') && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <CreditCard
-                    cardId="disney-inspire"
-                    title="Disney® Inspire Visa® Card"
-                    onApply={() => console.log('Apply Disney Inspire')}
-                    onDetails={() => console.log('Details Disney Inspire')}
-                    badgeLabel="SELECT OFFER"
+                    cardId="slate"
+                    title="Chase Slate® Credit Card"
+                    onApply={() => console.log('Apply Slate')}
+                    onDetails={() => console.log('Details Slate')}
+                    badgeLabel="NEW OFFER"
                   />
                 </div>
               )}
@@ -615,7 +620,7 @@ function ExplorePageInner() {
               col3: (
                 <div>
                   <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>Intro Offer</div>
-                  <div>Get a $100 Disney Gift Card after qualifying purchases and earn Disney Rewards Dollars.</div>
+                  <div>0% Intro APR for 15 months on purchases and balance transfers, then a variable APR of 21.49%-29.99%.</div>
                 </div>
               ),
             }}
@@ -626,7 +631,7 @@ function ExplorePageInner() {
             cards={{
               col1: <div>$0†</div>,
               col2: <div>$0†</div>,
-              col3: <div>$149†</div>,
+              col3: <div>$0†</div>,
             }}
           />
 
@@ -635,7 +640,7 @@ function ExplorePageInner() {
             cards={{
               col1: <div>3% of each transaction in U.S. dollars.†</div>,
               col2: <div>3% of each transaction in U.S. dollars.†</div>,
-              col3: <div>No Foreign Transaction Fees</div>,
+              col3: <div>3% of each transaction in U.S. dollars.†</div>,
             }}
           />
 
@@ -656,7 +661,7 @@ function ExplorePageInner() {
               ),
               col3: (
                 <div>
-                  Purchases: 19.24%-27.99% variable APR.† Balance Transfers: 19.24%-27.99% variable APR.†
+                  0% Intro APR for 15 months on purchases and balance transfers.† After the intro period, a variable APR of 21.49%-29.99%.†
                 </div>
               ),
             }}
@@ -687,12 +692,12 @@ function ExplorePageInner() {
               ),
               col3: (
                 <div>
-                  <div style={{ fontWeight: 'bold', marginBottom: '12px' }}>Earn $300 Disney Rewards Dollars</div>
+                  <div style={{ fontWeight: 'bold', marginBottom: '12px' }}>Designed for balance transfers</div>
                   <ul style={{ paddingLeft: '20px', margin: '0' }}>
-                    <li>Earn $300 after spending $2,000/year on Disney experiences</li>
-                    <li>Earn 2x Disney Rewards Dollars on Disney co-branded purchases</li>
-                    <li>Earn 1x Disney Rewards Dollars on all other purchases</li>
-                    <li>Exclusive Disney cardholder benefits</li>
+                    <li>0% Intro APR for 15 months on purchases and balance transfers</li>
+                    <li>$0 Intro balance transfer fee for the first 60 days</li>
+                    <li>Free access to your credit score with Credit Journey</li>
+                    <li>No annual fee</li>
                   </ul>
                 </div>
               ),
@@ -706,8 +711,7 @@ function ExplorePageInner() {
               col2: <div>No minimum to redeem for cash back. Cash Back rewards do not expire as long as your account is open.</div>,
               col3: (
                 <div>
-                  Disney Rewards Dollars can be redeemed toward most of your favorite Disney experiences including theme park tickets, hotel stays, Disney Cruise Line bookings,
-                  dining, and merchandise.
+                  No rewards program. Chase Slate is built for simplicity — focus on paying down balances with 0% Intro APR and no annual fee.
                 </div>
               ),
             }}
@@ -738,13 +742,13 @@ function ExplorePageInner() {
               col3: (
                 <div>
                   <ul style={{ paddingLeft: '20px', margin: '0' }}>
-                    <li>0% Intro APR offer</li>
-                    <li>10% off Select Purchases at Disney Parks</li>
-                    <li>15% off Select Guided Tours</li>
-                    <li>Disney Parks Photo Opportunities</li>
-                    <li>Complimentary concierge service</li>
+                    <li>0% Intro APR for 15 months</li>
+                    <li>$0 Intro balance transfer fee for 60 days</li>
+                    <li>Credit Journey — free credit score</li>
                     <li>Zero Fraud Liability</li>
-                    <li>Travel benefits and protections</li>
+                    <li>24/7 customer service</li>
+                    <li>Purchase protection</li>
+                    <li>No annual fee</li>
                   </ul>
                 </div>
               ),

@@ -1,14 +1,27 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+/* Chase Logo matching home page */
+function ChaseLogo({ fill = '#101820' }: { fill?: string }) {
+  return (
+    <svg width="160" height="28" viewBox="0 0 160 28" fill="none">
+      <text x="0" y="22" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="26" fontWeight="800" letterSpacing="3" fill={fill}>CHASE</text>
+      <g transform="translate(120, 2)">
+        <path d="M12 0h7.5a2 2 0 012 2v7.5h-2V2h-7.5V0z" fill="#0060f0"/>
+        <path d="M23.5 12v7.5a2 2 0 01-2 2H14v-2h7.5V12h2z" fill="#0060f0"/>
+        <path d="M12 23.5H4.5a2 2 0 01-2-2V14h2v7.5H12v2z" fill="#0060f0"/>
+        <path d="M0.5 12V4.5a2 2 0 012-2H10v2H2.5V12h-2z" fill="#0060f0"/>
+      </g>
+    </svg>
+  );
+}
 
 export default function CheckingPage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('all');
-
-  const headerStyle = {
-    fontFamily: "'Open Sans', sans-serif",
-    color: '#101820',
-  };
+  const [query, setQuery] = useState('');
 
   return (
     <div style={{ fontFamily: "'Open Sans', sans-serif", color: '#101820' }}>
@@ -74,25 +87,7 @@ export default function CheckingPage() {
             alignItems: 'center',
           }}
         >
-          <svg width="126" height="24" viewBox="0 0 126 24">
-            <text
-              x="0"
-              y="20"
-              fontFamily="'Helvetica Neue', Arial, sans-serif"
-              fontSize="24"
-              fontWeight="800"
-              letterSpacing="2"
-              fill="#101820"
-            >
-              CHASE
-            </text>
-            <g transform="translate(102, 2)">
-              <rect x="0" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
-              <rect x="7" y="0" width="3.5" height="8" rx="0.5" fill="#0060f0" />
-              <rect x="10.5" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
-              <rect x="7" y="10.5" width="3.5" height="8" rx="0.5" fill="#0060f0" />
-            </g>
-          </svg>
+          <ChaseLogo />
         </div>
       </div>
 
@@ -139,6 +134,76 @@ export default function CheckingPage() {
         </div>
       </div>
 
+      {/* ═══ AGENTIC BANKING SECTION ═══ */}
+      <section style={{
+        background: 'linear-gradient(135deg, #001d3d 0%, #003566 30%, #0060a9 60%, #1a8fe3 100%)',
+        padding: '48px 0',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+          background: 'radial-gradient(ellipse at 70% 50%, rgba(150,210,255,0.12) 0%, transparent 60%)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <h2 style={{
+            color: '#fff', fontSize: '32px', fontWeight: 700, marginBottom: '8px', letterSpacing: '-0.5px',
+          }}>
+            Start Seamless Banking Today
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '15px', marginBottom: '28px' }}>
+            Powered by intelligent assistance to help you bank smarter
+          </p>
+          <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+            <div style={{
+              background: '#fff', borderRadius: '12px', padding: '6px',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+              display: 'flex', flexDirection: 'column',
+            }}>
+              <textarea
+                placeholder="What are you looking for today?"
+                rows={3}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey && query.trim()) { e.preventDefault(); router.push(`/explore?q=${encodeURIComponent(query.trim())}`); } }}
+                style={{
+                  width: '100%', border: 'none', outline: 'none', resize: 'none',
+                  fontSize: '16px', color: '#101820', padding: '16px 18px 12px',
+                  fontFamily: "'Open Sans', sans-serif", borderRadius: '12px 12px 0 0',
+                  background: 'transparent',
+                }}
+              />
+              <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 12px 12px' }}>
+                <button
+                  onClick={() => { if (query.trim()) router.push(`/explore?q=${encodeURIComponent(query.trim())}`); }}
+                  style={{
+                    background: '#0060f0', color: '#fff', border: 'none', borderRadius: '8px',
+                    padding: '10px 32px', fontSize: '15px', fontWeight: 600,
+                    cursor: 'pointer', fontFamily: "'Open Sans', sans-serif",
+                  }}>
+                  Explore
+                </button>
+              </div>
+            </div>
+            <div style={{
+              display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '16px', flexWrap: 'wrap',
+            }}>
+              {['Open a checking account', 'Compare credit cards', 'Mortgage rates', 'Start investing'].map((suggestion, i) => (
+                <button key={i} onClick={() => { if (suggestion === 'Open a checking account') { /* already here */ } else { router.push(`/explore?q=${encodeURIComponent(suggestion)}`); } }} style={{
+                  background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)',
+                  borderRadius: '20px', padding: '8px 18px', color: '#fff', fontSize: '13px',
+                  cursor: 'pointer', fontFamily: "'Open Sans', sans-serif",
+                  backdropFilter: 'blur(4px)',
+                }}>
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* HERO SECTION */}
       <div
         style={{
@@ -152,48 +217,49 @@ export default function CheckingPage() {
         }}
       >
         {/* LEFT SIDE - BONUS GRAPHIC */}
-        <div style={{ position: 'relative', height: '220px' }}>
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 300 300"
-            style={{ maxWidth: '100%' }}
-          >
-            {/* Blue background rectangle */}
-            <rect x="20" y="30" width="260" height="200" rx="12" fill="#0060f0" />
-
-            {/* Pink/coral rounded rectangle overlapping */}
-            <rect x="160" y="10" width="130" height="130" rx="16" fill="#ff6b6b" />
-
-            {/* White/cream rounded rectangle in front */}
-            <rect x="80" y="120" width="170" height="140" rx="12" fill="#f5f1eb" />
-
-            {/* $125 text */}
-            <text
-              x="150"
-              y="200"
-              textAnchor="middle"
-              fontFamily="'Open Sans', sans-serif"
-              fontSize="80"
-              fontWeight="700"
-              fill="#101820"
-            >
-              $125
-            </text>
-
-            {/* BONUS text */}
-            <text
-              x="150"
-              y="250"
-              textAnchor="middle"
-              fontFamily="'Open Sans', sans-serif"
-              fontSize="42"
-              fontWeight="700"
-              fill="#101820"
-            >
-              BONUS
-            </text>
-          </svg>
+        <div style={{
+          position: 'relative',
+          height: '220px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          {/* Blue card background */}
+          <div style={{
+            width: '320px',
+            height: '200px',
+            borderRadius: '16px',
+            background: 'linear-gradient(135deg, #0047b3 0%, #0060f0 50%, #3d8bf5 100%)',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 8px 32px rgba(0,96,240,0.25)',
+            overflow: 'hidden',
+          }}>
+            {/* Decorative circles */}
+            <div style={{
+              position: 'absolute', top: '-30px', right: '-30px',
+              width: '120px', height: '120px', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.08)',
+            }} />
+            <div style={{
+              position: 'absolute', bottom: '-20px', left: '-20px',
+              width: '80px', height: '80px', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.06)',
+            }} />
+            {/* Content */}
+            <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+              <p style={{
+                color: '#fff', fontSize: '72px', fontWeight: 800,
+                lineHeight: 1, letterSpacing: '-2px', margin: 0,
+              }}>$125</p>
+              <p style={{
+                color: 'rgba(255,255,255,0.9)', fontSize: '24px', fontWeight: 700,
+                letterSpacing: '6px', margin: '4px 0 0',
+              }}>BONUS</p>
+            </div>
+          </div>
         </div>
 
         {/* RIGHT SIDE - TEXT CONTENT */}
@@ -1030,25 +1096,7 @@ export default function CheckingPage() {
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ marginBottom: '40px' }}>
-            <svg width="126" height="24" viewBox="0 0 126 24">
-              <text
-                x="0"
-                y="20"
-                fontFamily="'Helvetica Neue', Arial, sans-serif"
-                fontSize="24"
-                fontWeight="800"
-                letterSpacing="2"
-                fill="#fff"
-              >
-                CHASE
-              </text>
-              <g transform="translate(102, 2)">
-                <rect x="0" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
-                <rect x="7" y="0" width="3.5" height="8" rx="0.5" fill="#0060f0" />
-                <rect x="10.5" y="7" width="8" height="3.5" rx="0.5" fill="#0060f0" />
-                <rect x="7" y="10.5" width="3.5" height="8" rx="0.5" fill="#0060f0" />
-              </g>
-            </svg>
+            <ChaseLogo fill="#fff" />
           </div>
 
           <div

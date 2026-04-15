@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 /* ─── Icon Components (matching Figma exactly) ─── */
 function ChevronDown() {
@@ -96,11 +97,13 @@ function HomeIcon() {
    MAIN PAGE
    ═══════════════════════════════════════════════ */
 export default function ChaseMirror() {
+  const router = useRouter();
   const [activeNav, setActiveNav] = useState<number | null>(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [query, setQuery] = useState("");
 
   const navLinks = ["Checking", "Savings & CDs", "Credit cards", "Home loans", "Auto", "Investing by J.P. Morgan", "Education & goals", "Travel"];
 
@@ -280,6 +283,9 @@ export default function ChaseMirror() {
               <textarea
                 placeholder="What are you looking for today?"
                 rows={3}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey && query.trim()) { e.preventDefault(); router.push(`/explore?q=${encodeURIComponent(query.trim())}`); } }}
                 style={{
                   width: "100%", border: "none", outline: "none", resize: "none",
                   fontSize: "16px", color: "#101820", padding: "16px 18px 12px",
@@ -288,7 +294,9 @@ export default function ChaseMirror() {
                 }}
               />
               <div style={{ display: "flex", justifyContent: "flex-end", padding: "0 12px 12px" }}>
-                <button style={{
+                <button
+                  onClick={() => { if (query.trim()) router.push(`/explore?q=${encodeURIComponent(query.trim())}`); }}
+                  style={{
                   background: "#0060f0", color: "#fff", border: "none", borderRadius: "8px",
                   padding: "10px 32px", fontSize: "15px", fontWeight: 600,
                   cursor: "pointer", fontFamily: "'Open Sans', sans-serif",
@@ -302,7 +310,7 @@ export default function ChaseMirror() {
               display: "flex", justifyContent: "center", gap: "12px", marginTop: "20px", flexWrap: "wrap",
             }}>
               {["Open a checking account", "Compare credit cards", "Mortgage rates", "Start investing"].map((suggestion, i) => (
-                <button key={i} style={{
+                <button key={i} onClick={() => router.push(`/explore?q=${encodeURIComponent(suggestion)}`)} style={{
                   background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)",
                   borderRadius: "20px", padding: "8px 18px", color: "#fff", fontSize: "13px",
                   cursor: "pointer", fontFamily: "'Open Sans', sans-serif",

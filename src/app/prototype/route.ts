@@ -1,9 +1,1048 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
-
 export async function GET() {
-  const html = readFileSync(join(process.cwd(), 'public', 'checking-prototype.html'), 'utf-8');
+  const html = `
+<!DOCTYPE html>
+<!-- Chase Checking Prototype - Proxim Agency -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chase Checking - Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Open Sans', sans-serif; color: #101820; background: #fff; }
+  a { text-decoration: none; }
+  button { font-family: 'Open Sans', sans-serif; }
+
+  .util-bar { height: 36px; border-bottom: 1px solid #c6c4c4; background: #fff; font-size: 12px; }
+  .util-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; height: 100%; display: flex; justify-content: space-between; align-items: center; }
+  .util-inner div { display: flex; gap: 20px; align-items: center; }
+  .util-inner a { color: inherit; text-decoration: none; }
+
+  .logo-bar { height: 60px; background: #fff; border-bottom: 1px solid #c6c4c4; }
+  .logo-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; height: 100%; display: flex; align-items: center; }
+
+  .nav-bar { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #c6c4c4; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; gap: 28px; height: 48px; align-items: center; }
+  .nav-inner span { font-size: 14px; color: #414042; white-space: nowrap; cursor: pointer; }
+  .nav-inner span.active { color: #0060f0; font-weight: 600; border-bottom: 3px solid #0060f0; padding-bottom: 12px; }
+
+  /* Hero */
+  .hero { max-width: 1200px; margin: 0 auto; padding: 40px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .bonus-wrap { display: flex; align-items: center; justify-content: center; }
+  .bonus-card { width: 340px; height: 210px; border-radius: 16px; background: linear-gradient(135deg, #0047b3 0%, #0060f0 50%, #3d8bf5 100%); position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(0,96,240,0.25); overflow: hidden; }
+  .bonus-card .c1 { position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+  .bonus-card .c2 { position: absolute; bottom: -20px; left: -20px; width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .bonus-card .inner { text-align: center; position: relative; z-index: 1; }
+  .bonus-card .amount { color: #fff; font-size: 72px; font-weight: 800; line-height: 1; letter-spacing: -2px; }
+  .bonus-card .blabel { color: rgba(255,255,255,0.9); font-size: 24px; font-weight: 700; letter-spacing: 6px; margin-top: 4px; }
+  .hero-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+  .hero-text p { font-size: 14px; line-height: 1.6; margin-bottom: 24px; color: #414042; }
+  .green-btn { background: #128842; color: #fff; border: none; border-radius: 4px; padding: 12px 32px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; }
+
+  /* AI Section - collapsed state */
+  .ai-section {
+    background: linear-gradient(135deg, #001d3d 0%, #003566 30%, #0060a9 60%, #1a8fe3 100%);
+    position: relative; overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .ai-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 70% 50%, rgba(150,210,255,0.12) 0%, transparent 60%); pointer-events: none; }
+  .ai-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; text-align: center; }
+  .ai-section h2 { color: #fff; font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  .ai-section .sub { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 24px; }
+
+  /* Collapsed: just the input bar */
+  .ai-section.collapsed { padding: 32px 0; }
+  .ai-section.expanded { padding: 40px 0 48px; }
+
+  .chat-container { max-width: 720px; margin: 0 auto; }
+
+  .chat-input-wrap { background: #fff; border-radius: 12px; padding: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); display: flex; align-items: flex-end; }
+  .chat-input-wrap textarea { flex: 1; border: none; outline: none; resize: none; font-size: 15px; color: #101820; padding: 12px 14px; font-family: 'Open Sans', sans-serif; background: transparent; min-height: 44px; max-height: 100px; }
+  .chat-input-wrap .send-btn { background: #0060f0; color: #fff; border: none; border-radius: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin: 0 4px 4px 0; flex-shrink: 0; transition: opacity 0.2s; }
+  .chat-input-wrap .send-btn:disabled { opacity: 0.4; cursor: default; }
+
+  .chips { display: flex; justify-content: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; transition: opacity 0.3s; }
+  .chip { background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; color: #fff; font-size: 13px; cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s; }
+  .chip:hover { background: rgba(255,255,255,0.22); }
+
+  /* Chat thread */
+  #chatThread { display: flex; flex-direction: column; gap: 28px; }
+
+  .thread-turn { animation: fadeIn 0.4s ease; }
+  .thread-turn .bot-text {
+    color: rgba(255,255,255,0.92); font-size: 15px; line-height: 1.7;
+    max-width: 640px; margin: 0 auto 24px; text-align: center;
+  }
+
+  /* Collapsed previous turn */
+  .thread-turn.collapsed {
+    cursor: pointer; transition: all 0.4s ease;
+  }
+  .thread-turn.collapsed .bot-text,
+  .thread-turn.collapsed .compare-wrap,
+  .thread-turn.collapsed .text-response { display: none; }
+  .thread-turn.collapsed .user-query {
+    font-size: 12px; padding: 5px 14px; opacity: 0.6;
+    margin-bottom: 0; transition: opacity 0.2s;
+  }
+  .thread-turn.collapsed:hover .user-query { opacity: 1; }
+  .collapsed-label {
+    color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 2px;
+    text-align: center;
+  }
+
+  /* Side by side comparison cards */
+  .compare-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    max-width: 720px; margin: 0 auto;
+  }
+  .compare-wrap { align-items: stretch; }
+  .compare-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 14px; padding: 24px 20px;
+    text-align: left; color: #101820;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    cursor: pointer; position: relative;
+    display: flex; flex-direction: column;
+  }
+  .compare-card:hover { border-color: #0060f0; box-shadow: 0 8px 28px rgba(0,96,240,0.18); transform: translateY(-2px); }
+  .compare-card .tag { display: inline-block; background: #128842; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px; letter-spacing: 0.5px; }
+  .compare-card .tag.best { background: #f5c518; color: #101820; }
+  .compare-card .cname { font-size: 18px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; color: #101820; }
+
+  .compare-row { display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: 6px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+  .compare-row:last-of-type { border-bottom: none !important; }
+  .compare-row .label { color: #717171; flex-shrink: 0; width: 80px; }
+  .compare-row .value { font-weight: 600; text-align: right; flex: 1; color: #101820; }
+
+  .compare-card .card-cta {
+    display: block; width: 100%; margin-top: auto; padding-top: 16px;
+    background: #128842; color: #fff; border: none; border-radius: 6px;
+    padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'Open Sans', sans-serif; text-align: center;
+    transition: background 0.2s;
+  }
+  .compare-card .card-cta:hover { background: #0f7339; }
+
+  .compare-card .card-cta.outline {
+    background: transparent; border: 1px solid #c6c4c4; color: #0060f0;
+  }
+  .compare-card .card-cta.outline:hover { background: #f5f5f5; }
+
+  /* Row tooltips */
+  .compare-row { position: relative; }
+  .compare-row .tip-icon {
+    width: 16px; height: 16px; border-radius: 50%; background: #eee; color: #717171;
+    font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;
+    margin-left: 4px; cursor: help; flex-shrink: 0; transition: background 0.2s, color 0.2s;
+  }
+  .compare-row:hover .tip-icon { background: #0060f0; color: #fff; }
+  .tooltip-bubble {
+    display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    background: #101820; color: #fff; font-size: 12px; font-weight: 400; line-height: 1.5;
+    padding: 10px 14px; border-radius: 8px; width: 240px; z-index: 20;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2); pointer-events: none; text-align: left;
+    margin-bottom: 6px;
+  }
+  .tooltip-bubble::after {
+    content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 6px solid transparent; border-top-color: #101820;
+  }
+  .compare-row:hover .tooltip-bubble { display: block; animation: fadeIn 0.2s ease; }
+
+  /* Expanded card detail */
+  .card-detail {
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
+    padding: 0 0; border-top: none;
+  }
+  .card-detail.open {
+    max-height: 400px; opacity: 1; padding: 16px 0 4px; border-top: 1px solid #eee; margin-top: 12px;
+  }
+  .card-detail h4 { font-size: 13px; font-weight: 700; color: #101820; margin-bottom: 10px; }
+  .card-detail ul { list-style: none; padding: 0; margin: 0 0 12px; }
+  .card-detail ul li {
+    font-size: 12px; color: #414042; padding: 6px 0; padding-left: 20px; position: relative; line-height: 1.5;
+  }
+  .card-detail ul li::before {
+    content: '✓'; position: absolute; left: 0; color: #128842; font-weight: 700;
+  }
+  .learn-more-btn {
+    background: none; border: none; color: #999; font-size: 12px; font-weight: 400;
+    cursor: pointer; font-family: 'Open Sans', sans-serif; padding: 0; margin-top: 10px;
+    display: flex; align-items: center; gap: 4px; transition: color 0.2s;
+  }
+  .learn-more-btn:hover { color: #0060f0; }
+  .learn-more-btn .arrow { transition: transform 0.3s; display: inline-block; font-size: 10px; }
+  .learn-more-btn.open .arrow { transform: rotate(180deg); }
+
+  /* Progress indicator */
+  .progress-indicator { padding: 20px 0 8px; max-width: 320px; margin: 0 auto; }
+  .progress-bar {
+    width: 100%; height: 4px; background: rgba(255,255,255,0.15);
+    border-radius: 4px; overflow: hidden; margin-bottom: 10px;
+  }
+  .progress-fill {
+    height: 100%; width: 0; background: linear-gradient(90deg, #3d8bf5, #8ec5fc);
+    border-radius: 4px; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progress-label {
+    color: rgba(255,255,255,0.7); font-size: 13px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+  /* Text-only response (no comparison cards) */
+  .text-response {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px; padding: 20px 24px;
+    max-width: 640px; margin: 0 auto;
+    backdrop-filter: blur(8px);
+  }
+
+  /* Thread divider between turns */
+  .thread-divider {
+    width: 60px; height: 1px; background: rgba(255,255,255,0.15);
+    margin: 0 auto;
+  }
+
+  /* Fade in animation for cards */
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .compare-card.animate { animation: slideUp 0.5s ease forwards; }
+  .compare-card.animate:nth-child(2) { animation-delay: 0.15s; }
+
+  /* User query display */
+  .user-query {
+    background: rgba(255,255,255,0.15); display: inline-block;
+    padding: 8px 20px; border-radius: 20px; color: #fff; font-size: 14px;
+    margin-bottom: 20px; backdrop-filter: blur(4px);
+  }
+
+  /* Tab Section */
+  .tab-section { max-width: 1200px; margin: 36px auto 0; padding: 0 20px; }
+  .tab-section .label { font-size: 15px; margin-bottom: 20px; color: #414042; }
+  .tabs { display: flex; gap: 40px; border-bottom: 1px solid #c6c4c4; }
+  .tab-btn { background: transparent; border: none; padding: 16px 0; font-size: 15px; font-weight: 400; color: #414042; cursor: pointer; margin-bottom: -1px; font-family: 'Open Sans', sans-serif; }
+  .tab-btn.active { font-weight: 600; color: #0060f0; border-bottom: 3px solid #0060f0; }
+
+  .tab-content { max-width: 1200px; margin: 0 auto; padding: 36px 20px; }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 48px; }
+  .cards-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .card { border: 1px solid #c6c4c4; border-radius: 8px; padding: 24px; transition: box-shadow 0.3s, border-color 0.3s; }
+  .card.highlighted { border-color: #0060f0; box-shadow: 0 0 0 2px #0060f0, 0 4px 16px rgba(0,96,240,0.15); }
+  .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+  .card .desc { font-size: 14px; color: #414042; margin-bottom: 16px; }
+  .card ul { list-style: none; padding: 0; margin-bottom: 20px; font-size: 14px; line-height: 1.6; color: #414042; }
+  .card ul li { margin-bottom: 8px; }
+  .card .fee-label { font-size: 12px; color: #414042; margin-bottom: 8px; }
+  .card .fee { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .card .fee-link { font-size: 14px; margin-bottom: 24px; }
+  .card .fee-link a { color: #0060f0; }
+  .card .cta { width: 100%; background: #128842; color: #fff; border: none; border-radius: 4px; padding: 12px 16px; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 12px; font-family: 'Open Sans', sans-serif; }
+  .card .details { font-size: 14px; text-align: center; }
+  .card .details a { color: #0060f0; }
+
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-header h2 { font-size: 24px; font-weight: 700; margin: 0; }
+  .section-header .sub { font-size: 13px; color: #414042; margin: 4px 0 0; }
+
+  /* Experience section — white bg like real Chase */
+  .experience { background: #fff; padding: 56px 20px 48px; margin-top: 24px; }
+  .experience-inner { max-width: 1200px; margin: 0 auto; }
+  .experience h2 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 48px; color: #101820; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+  .feature { text-align: center; }
+  .feature h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #101820; }
+  .feature p { font-size: 14px; color: #414042; line-height: 1.6; }
+  .feature .icon { margin-bottom: 20px; }
+
+  /* Disclosures */
+  .disclosures { max-width: 1200px; margin: 0 auto; padding: 40px 20px; font-size: 11px; color: #6b6b6b; line-height: 1.7; }
+  .disclosures p { margin-bottom: 12px; }
+
+  /* Social row */
+  .social-row { text-align: center; padding: 24px 20px; border-top: 1px solid #e0e0e0; }
+  .social-row span { font-size: 14px; color: #414042; margin-right: 16px; vertical-align: middle; }
+  .social-row a { display: inline-block; margin: 0 8px; vertical-align: middle; color: #414042; transition: color 0.2s; }
+  .social-row a:hover { color: #0060f0; }
+
+  /* Footer — light gray like real Chase */
+  .footer { background: #f5f5f5; padding: 48px 20px 0; border-top: 1px solid #e0e0e0; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer h3 { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 36px; color: #101820; }
+  .footer-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-bottom: 36px; }
+  .footer-grid h4 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #101820; }
+  .footer-grid .footer-icon { margin-bottom: 8px; }
+  .footer-grid p { font-size: 13px; color: #414042; line-height: 1.6; }
+  .footer-grid a { color: #0060f0; text-decoration: none; }
+  .footer-grid a:hover { text-decoration: underline; }
+
+  /* Other products row */
+  .other-products { text-align: center; padding: 24px 20px; border-top: 1px solid #e0e0e0; }
+  .other-products span { font-size: 13px; font-weight: 700; color: #101820; margin-right: 16px; }
+  .other-products a { font-size: 13px; color: #0060f0; text-decoration: none; margin: 0 12px; }
+  .other-products a:hover { text-decoration: underline; }
+
+  /* Copyright bar — dark */
+  .copyright-bar { background: #101820; padding: 20px; text-align: center; font-size: 11px; color: #999; line-height: 1.6; }
+  .copyright-bar a { color: #ccc; text-decoration: none; margin: 0 8px; }
+  .copyright-bar a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="util-bar">
+  <div class="util-inner">
+    <div><a href="https://www.chase.com/" target="_blank">Personal</a><a href="https://www.chase.com/business" target="_blank">Business</a><a href="https://www.chase.com/commercial-banking" target="_blank">Commercial</a></div>
+    <div>
+      <a href="https://www.chase.com/meeting-scheduler/getstarted" target="_blank">Schedule a meeting</a><a href="https://www.chase.com/digital/customer-service" target="_blank">Customer service</a><a href="https://www.chase.com/es/personal" target="_blank">Español</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#101820" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO BAR -->
+<div class="logo-bar">
+  <div class="logo-inner">
+    <a href="https://www.chase.com/" target="_blank">
+      <svg class="chase-logo" width="150" height="28" viewBox="0 0 150 28" fill="none">
+        <text x="0" y="22" font-family="'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="800" letter-spacing="3" fill="#101820">CHASE</text>
+        <g transform="translate(113, 1) scale(2.47) translate(-41.479, -0.67)">
+          <path d="M41.479 3.903v3.788h3.088V.67z" fill="#0060f0"/>
+          <path d="M44.712 11.189H48.5V8.101h-7.021z" fill="#0060f0"/>
+          <path d="M51.999 7.956V4.168H48.91v7.021z" fill="#0060f0"/>
+          <path d="M48.766.67h-3.788v3.088h7.021z" fill="#0060f0"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <div class="nav-inner">
+    <a href="https://www.chase.com/personal/checking" target="_blank"><span class="active">Checking</span></a>
+    <a href="https://www.chase.com/personal/savings" target="_blank"><span>Savings & CDs</span></a>
+    <a href="https://creditcards.chase.com/" target="_blank"><span>Credit cards</span></a>
+    <a href="https://www.chase.com/personal/mortgage" target="_blank"><span>Home loans</span></a>
+    <a href="https://autofinance.chase.com/" target="_blank"><span>Auto</span></a>
+    <a href="https://www.chase.com/personal/investments" target="_blank"><span>Investing by J.P. Morgan</span></a>
+    <a href="https://www.chase.com/personal/education" target="_blank"><span>Education & goals</span></a>
+    <a href="https://www.chase.com/personal/travel" target="_blank"><span>Travel</span></a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="bonus-wrap">
+    <div class="bonus-card">
+      <div class="c1"></div><div class="c2"></div>
+      <div class="inner">
+        <p class="amount">$125</p>
+        <p class="blabel">BONUS</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-text">
+    <h1>Start your money journey today</h1>
+    <p>As a new Chase checking customer, get <strong>$125 when you open a Chase Secure Banking&#8480; account with qualifying transactions</strong>. Plus, <strong>$0 Monthly Service Fee for customers age 17-24</strong>.</p>
+    <a href="https://account.chase.com/consumer/banking/open" target="_blank"><button class="green-btn">Open now</button></a>
+  </div>
+</div>
+
+<!-- AI SECTION -->
+<section class="ai-section collapsed" id="aiSection">
+  <div class="ai-overlay"></div>
+  <div class="ai-inner">
+    <div id="aiHeader">
+      <h2>Need help choosing?</h2>
+      <p class="sub">Tell us what matters most and we'll compare the best options for you</p>
+    </div>
+    <div class="chat-container">
+      <!-- Initial input + chips (before first message) -->
+      <div id="initialInput">
+        <div class="chat-input-wrap">
+          <textarea id="chatInput" rows="1" placeholder="e.g. I need a checking account with no monthly fees..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
+          <button class="send-btn" onclick="sendMessage()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+          </button>
+        </div>
+        <div class="chips" id="chipContainer">
+          <button class="chip" onclick="askQuestion(this.textContent)">I want the lowest fees</button>
+          <button class="chip" onclick="askQuestion(this.textContent)">I'm a college student</button>
+          <button class="chip" onclick="askQuestion(this.textContent)">Best for everyday use</button>
+          <button class="chip" onclick="askQuestion(this.textContent)">Premium banking</button>
+        </div>
+      </div>
+
+      <!-- Conversation thread (grows downward) -->
+      <div id="chatThread"></div>
+
+      <!-- Follow-up input (appears below cards after first message) -->
+      <div id="followUpInput" style="display:none; margin-top: 24px;">
+        <div class="chat-input-wrap">
+          <textarea id="followUpChatInput" rows="1" placeholder="Ask a follow-up..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFollowUp()}"></textarea>
+          <button class="send-btn" onclick="sendFollowUp()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+          </button>
+        </div>
+        <div class="chips" id="dynamicChips"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB SECTION -->
+<div class="tab-section">
+  <p class="label">Choose the checking accounts for:</p>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('all', this)">All</button>
+    <button class="tab-btn" onclick="switchTab('students', this)">Students & Kids</button>
+    <button class="tab-btn" onclick="switchTab('premium', this)">Premium</button>
+  </div>
+</div>
+
+<!-- TAB CONTENT -->
+<div class="tab-content">
+  <div id="tab-all">
+    <div class="cards-grid">
+      <div class="card" id="card-total">
+        <h3>Chase Total Checking&reg;</h3>
+        <p class="desc">Our most popular checking account with the banking essentials.</p>
+        <ul><li>&bull; Comes with Chase Overdraft Assist&#8480;</li><li>&bull; Ability to write checks and wire money</li></ul>
+        <p class="fee-label">Monthly Service Fee</p><p class="fee">$15 or $0</p>
+        <p class="fee-link"><a href="https://www.chase.com/personal/checking/total-checking" target="_blank">Avoid fee</a></p>
+        <a href="https://account.chase.com/consumer/banking/open" target="_blank"><button class="cta">Open now</button></a>
+        <p class="details"><a href="https://www.chase.com/personal/checking/total-checking" target="_blank">Account details</a></p>
+      </div>
+      <div class="card" id="card-secure">
+        <h3>Chase Secure Banking&#8480;</h3>
+        <p class="desc">A simple checking account with no overdraft fees.</p>
+        <ul><li>&bull; Direct deposits up to two business days early</li><li>&bull; $0 Monthly Service Fee for account owners who are 17-24 years old</li></ul>
+        <p class="fee-label">Monthly Service Fee</p><p class="fee">$4.95 or $0</p>
+        <p class="fee-link"><a href="https://www.chase.com/personal/checking/secure-banking" target="_blank">Avoid fee</a></p>
+        <a href="https://account.chase.com/consumer/banking/open" target="_blank"><button class="cta">Open now</button></a>
+        <p class="details"><a href="https://www.chase.com/personal/checking/secure-banking" target="_blank">Account details</a></p>
+      </div>
+      <div class="card" id="card-premier">
+        <h3>Chase Premier Plus Checking&#8480;</h3>
+        <p class="desc">Keep more of your money for your financial goals</p>
+        <ul><li>&bull; No Chase fees on ATMs across the globe, no foreign exchange rate adjustment fees, and more</li><li>&bull; Perks for military members with $0 Monthly Service Fee and no minimum deposit required</li></ul>
+        <p class="fee-label">Monthly Service Fee</p><p class="fee">$25 or $0</p>
+        <p class="fee-link"><a href="https://www.chase.com/personal/checking/premier-plus-checking" target="_blank">Avoid fee</a></p>
+        <a href="https://account.chase.com/consumer/banking/open" target="_blank"><button class="cta">Open now</button></a>
+        <p class="details"><a href="https://www.chase.com/personal/checking/premier-plus-checking" target="_blank">Account details</a></p>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#f0f0f0" stroke="#0060f0" stroke-width="2"/><path d="M20 12L28 18L26 28H14L12 18L20 12Z" fill="#0060f0"/><line x1="20" y1="22" x2="20" y2="28" stroke="#fff" stroke-width="1.5"/><line x1="16" y1="25" x2="24" y2="25" stroke="#fff" stroke-width="1.5"/></svg>
+      <div><h2>Students & Kids</h2><p class="sub">Accounts subject to approval</p></div>
+    </div>
+    <div class="cards-grid-2" style="margin-bottom:48px">
+      <div class="card" id="card-highschool"><p class="desc">Parent co-owned for teens ages 13 to 17. Must be opened in branch.</p><ul><li>&bull; A checking account with tools for teens, in partnership with parents</li><li>&bull; Access to Zelle&reg; and direct deposit</li></ul><p class="fee-label">Monthly Service Fee</p><p class="fee">$0</p><p class="fee-link"><a href="https://www.chase.com/personal/checking/high-school-checking" target="_blank">Qualifying activities</a></p><a href="https://www.chase.com/meeting-scheduler/getstarted" target="_blank"><button class="cta">Schedule a meeting</button></a><p class="details"><a href="https://www.chase.com/personal/checking/high-school-checking" target="_blank">Account details</a></p></div>
+      <div class="card" id="card-first"><p class="desc">Parent-owned and designed with kids ages 6-12 in mind and available for kids 6-17 years old.</p><ul><li>&bull; A debit card for kids with oversight by parents</li><li>&bull; Gives kids tools, tips and safety features to help them learn money basics</li></ul><p class="fee-label">Monthly Service Fee</p><p class="fee">$0</p><p class="fee-link"><a href="https://www.chase.com/personal/checking/first-banking" target="_blank">Requires eligible account to open</a></p><a href="https://account.chase.com/consumer/banking/open" target="_blank"><button class="cta">Open now</button></a><p class="details"><a href="https://www.chase.com/personal/checking/first-banking" target="_blank">Account details</a></p></div>
+    </div>
+
+    <div class="section-header">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#f0f0f0" stroke="#0060f0" stroke-width="2"/><path d="M20 10L26 16L20 22L14 16Z" fill="#0060f0"/><path d="M20 18L26 24L20 30L14 24Z" fill="#0060f0" opacity="0.6"/></svg>
+      <div><h2>Premium</h2><p class="sub">Accounts subject to approval</p></div>
+    </div>
+    <div style="max-width:400px">
+      <div class="card" id="card-sapphire"><p class="desc">Dedicated banker support and investing guidance from J.P. Morgan Wealth Management.</p><ul><li>&bull; Higher limits on everyday transactions</li><li>&bull; No ATM fees worldwide plus 24/7 priority service line</li></ul><p class="fee-label">Monthly Service Fee</p><p class="fee">$35 or $0</p><p class="fee-link"><a href="https://www.chase.com/personal/checking/sapphire-banking" target="_blank">Avoid fee</a></p><a href="https://www.chase.com/meeting-scheduler/getstarted" target="_blank"><button class="cta">Schedule a meeting</button></a><p class="details"><a href="https://www.chase.com/personal/checking/sapphire-banking" target="_blank">Account details</a></p></div>
+    </div>
+  </div>
+
+  <div id="tab-students" style="display:none">
+    <div class="section-header"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#f0f0f0" stroke="#0060f0" stroke-width="2"/><path d="M20 12L28 18L26 28H14L12 18L20 12Z" fill="#0060f0"/><line x1="20" y1="22" x2="20" y2="28" stroke="#fff" stroke-width="1.5"/><line x1="16" y1="25" x2="24" y2="25" stroke="#fff" stroke-width="1.5"/></svg><div><h2>Students & Kids</h2><p class="sub">Accounts subject to approval</p></div></div>
+    <div class="cards-grid-2">
+      <div class="card"><p class="desc">Parent co-owned for teens ages 13 to 17. Must be opened in branch.</p><ul><li>&bull; A checking account with tools for teens</li><li>&bull; Access to Zelle&reg; and direct deposit</li></ul><p class="fee-label">Monthly Service Fee</p><p class="fee">$0</p><p class="fee-link"><a href="https://www.chase.com/personal/checking/high-school-checking" target="_blank">Qualifying activities</a></p><a href="https://www.chase.com/meeting-scheduler/getstarted" target="_blank"><button class="cta">Schedule a meeting</button></a><p class="details"><a href="https://www.chase.com/personal/checking/high-school-checking" target="_blank">Account details</a></p></div>
+      <div class="card"><p class="desc">Parent-owned for kids ages 6-17.</p><ul><li>&bull; A debit card for kids with oversight by parents</li><li>&bull; Tools, tips and safety features</li></ul><p class="fee-label">Monthly Service Fee</p><p class="fee">$0</p><p class="fee-link"><a href="https://www.chase.com/personal/checking/first-banking" target="_blank">Requires eligible account</a></p><a href="https://account.chase.com/consumer/banking/open" target="_blank"><button class="cta">Open now</button></a><p class="details"><a href="https://www.chase.com/personal/checking/first-banking" target="_blank">Account details</a></p></div>
+    </div>
+  </div>
+
+  <div id="tab-premium" style="display:none">
+    <div class="section-header"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#f0f0f0" stroke="#0060f0" stroke-width="2"/><path d="M20 10L26 16L20 22L14 16Z" fill="#0060f0"/><path d="M20 18L26 24L20 30L14 24Z" fill="#0060f0" opacity="0.6"/></svg><div><h2>Premium</h2><p class="sub">Accounts subject to approval</p></div></div>
+    <div style="max-width:400px"><div class="card"><p class="desc">Dedicated banker support and investing guidance from J.P. Morgan Wealth Management.</p><ul><li>&bull; Higher limits on everyday transactions</li><li>&bull; No ATM fees worldwide plus 24/7 priority service line</li></ul><p class="fee-label">Monthly Service Fee</p><p class="fee">$35 or $0</p><p class="fee-link"><a href="https://www.chase.com/personal/checking/sapphire-banking" target="_blank">Avoid fee</a></p><a href="https://www.chase.com/meeting-scheduler/getstarted" target="_blank"><button class="cta">Schedule a meeting</button></a><p class="details"><a href="https://www.chase.com/personal/checking/sapphire-banking" target="_blank">Account details</a></p></div></div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="experience">
+  <div class="experience-inner">
+    <h2>Experience seamless banking with Chase</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="12" y="22" width="40" height="36" rx="3" fill="#0060f0" opacity="0.15"/>
+            <rect x="22" y="16" width="44" height="36" rx="3" fill="#fff" stroke="#0060f0" stroke-width="2"/>
+            <rect x="28" y="26" width="20" height="3" rx="1" fill="#0060f0" opacity="0.4"/>
+            <rect x="28" y="33" width="14" height="3" rx="1" fill="#0060f0" opacity="0.4"/>
+            <circle cx="32" cy="56" r="8" fill="#128842"/>
+            <text x="32" y="60" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">$</text>
+          </svg>
+        </div>
+        <h3>Convenient ATMs and branches</h3>
+        <p>Access to more than 15,000 ATMs and 5,000 branches.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="25" y="8" width="30" height="56" rx="6" fill="#fff" stroke="#0060f0" stroke-width="2"/>
+            <rect x="30" y="18" width="20" height="30" rx="2" fill="#0060f0" opacity="0.08"/>
+            <rect x="33" y="24" width="14" height="2" rx="1" fill="#0060f0" opacity="0.5"/>
+            <rect x="33" y="29" width="10" height="2" rx="1" fill="#128842" opacity="0.6"/>
+            <rect x="33" y="34" width="14" height="2" rx="1" fill="#0060f0" opacity="0.5"/>
+            <rect x="33" y="39" width="8" height="2" rx="1" fill="#f5a623" opacity="0.6"/>
+            <circle cx="40" cy="56" r="3" fill="#0060f0" opacity="0.3"/>
+          </svg>
+        </div>
+        <h3>Chase Mobile&reg; app</h3>
+        <p>Manage your money, deposit checks and pay bills or people from virtually anywhere, all with the Chase Mobile app.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="20" y="26" width="40" height="32" rx="4" fill="#fff" stroke="#0060f0" stroke-width="2"/>
+            <path d="M32 26V20a8 8 0 0 1 16 0v6" stroke="#0060f0" stroke-width="2" fill="none"/>
+            <circle cx="40" cy="40" r="5" fill="#0060f0" opacity="0.2" stroke="#0060f0" stroke-width="2"/>
+            <rect x="39" y="42" width="2" height="6" rx="1" fill="#0060f0"/>
+          </svg>
+        </div>
+        <h3>Card lock</h3>
+        <p>Lock or unlock your debit card if you misplace it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DISCLOSURES -->
+<div class="disclosures">
+  <p>"Chase," "JPMorgan," "JPMorgan Chase," the JPMorgan Chase logo and the Octagon Symbol are trademarks of JPMorgan Chase Bank, N.A. JPMorgan Chase Bank, N.A. is a wholly-owned subsidiary of JPMorgan Chase &amp; Co.</p>
+  <p>Deposit products provided by JPMorgan Chase Bank, N.A. Member FDIC. Equal Opportunity Lender.</p>
+  <p>INVESTMENT AND INSURANCE PRODUCTS ARE: &bull; NOT FDIC INSURED &bull; NOT INSURED BY ANY FEDERAL GOVERNMENT AGENCY &bull; NOT A DEPOSIT OR OTHER OBLIGATION OF, OR GUARANTEED BY, JPMORGAN CHASE BANK, N.A. OR ANY OF ITS AFFILIATES &bull; SUBJECT TO INVESTMENT RISKS, INCLUDING POSSIBLE LOSS OF THE PRINCIPAL AMOUNT INVESTED</p>
+</div>
+
+<!-- SOCIAL ROW -->
+<div class="social-row">
+  <span>Follow us:</span>
+  <a href="https://www.facebook.com/chase" target="_blank" aria-label="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+  <a href="https://www.instagram.com/chase" target="_blank" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+  <a href="https://x.com/Chase" target="_blank" aria-label="X"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+  <a href="https://www.youtube.com/chase" target="_blank" aria-label="YouTube"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23 9.71a8.5 8.5 0 00-.91-4.13 2.92 2.92 0 00-1.72-1A78 78 0 0012 4.27a78 78 0 00-8.37.31 2.92 2.92 0 00-1.72 1A8.5 8.5 0 001 9.71a44.5 44.5 0 000 4.58 8.5 8.5 0 00.91 4.13 2.92 2.92 0 001.72 1A78 78 0 0012 19.73a78 78 0 008.37-.31 2.92 2.92 0 001.72-1 8.5 8.5 0 00.91-4.13 44.5 44.5 0 000-4.58zM9.74 14.85V8.65l5.55 3.1z"/></svg></a>
+  <a href="https://www.linkedin.com/company/chase" target="_blank" aria-label="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></a>
+  <a href="https://www.pinterest.com/chase" target="_blank" aria-label="Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg></a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <h3>We're here to help you manage your money today and tomorrow</h3>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="2" stroke="#414042" stroke-width="1.5" fill="none"/><path d="M8 14h12M8 18h8" stroke="#414042" stroke-width="1.5"/></svg></div>
+        <h4>Chase banking</h4>
+        <p>We want to make <a href="https://www.chase.com/" target="_blank">banking</a> easy. Access your <a href="https://www.chase.com/personal/checking" target="_blank">bank account</a> or <a href="https://account.chase.com/consumer/banking/open" target="_blank">open a bank account online</a>. <a href="https://www.chase.com/" target="_blank">Bank</a> from almost anywhere by phone, tablet or computer and more than 15,000 ATMs and 5,000 branches.</p>
+      </div>
+      <div>
+        <div class="footer-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#414042" stroke-width="1.5" fill="none"/><path d="M14 4a14.5 14.5 0 014 10 14.5 14.5 0 01-4 10 14.5 14.5 0 01-4-10 14.5 14.5 0 014-10z" stroke="#414042" stroke-width="1.5" fill="none"/><path d="M4 14h20" stroke="#414042" stroke-width="1.5"/></svg></div>
+        <h4>Savings Accounts &amp; CDs</h4>
+        <p>It's never too early to begin saving. <a href="https://www.chase.com/personal/savings" target="_blank">Open a savings account</a> or open a Certificate of Deposit (<a href="https://www.chase.com/personal/savings/bank-cd" target="_blank">see interest rates</a>) and start saving your money.</p>
+      </div>
+      <div>
+        <div class="footer-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke="#414042" stroke-width="1.5" fill="none"/><path d="M4 11h20" stroke="#414042" stroke-width="1.5"/></svg></div>
+        <h4>Checking</h4>
+        <p>Find the <a href="https://www.chase.com/personal/checking" target="_blank">checking account</a> that's best for you. See our <a href="https://www.chase.com/personal/checking/total-checking" target="_blank">Chase Total Checking&reg;</a> offer for new checking customers. Check out our <a href="https://www.chase.com/personal/checking/secure-banking" target="_blank">bank account without overdraft fees</a>.</p>
+      </div>
+      <div>
+        <div class="footer-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="2" stroke="#414042" stroke-width="1.5" fill="none"/><path d="M10 10h8M10 14h6M10 18h8" stroke="#414042" stroke-width="1.5"/></svg></div>
+        <h4>Student banking</h4>
+        <p>Discover products and financial education tailored to help parents and students at the <a href="https://www.chase.com/personal/education" target="_blank">Student Center</a>. For parents with kids and teens, explore <a href="https://www.chase.com/personal/checking/high-school-checking" target="_blank">Chase High School Checking&#8480;</a> or <a href="https://www.chase.com/personal/checking/first-banking" target="_blank">Chase First Banking&#8480;</a>.</p>
+      </div>
+      <div>
+        <div class="footer-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="2" stroke="#414042" stroke-width="1.5" fill="none"/><path d="M10 12l3 3 5-5" stroke="#414042" stroke-width="1.5" fill="none"/></svg></div>
+        <h4>About Chase</h4>
+        <p>Chase serves over 84 million consumers and 7 million small businesses. To learn more, visit the <a href="https://www.chase.com/personal/education" target="_blank">Banking Education Center</a>. For questions, please contact <a href="https://www.chase.com/digital/customer-service" target="_blank">Chase customer service</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Products -->
+  <div class="other-products">
+    <span>Other Products &amp; Services:</span>
+    <a href="https://www.chase.com/digital/online-banking" target="_blank">Online Banking</a>
+    <a href="https://www.chase.com/digital/mobile-banking" target="_blank">Mobile Banking</a>
+    <a href="https://www.chase.com/personal/education" target="_blank">Student Center</a>
+    <a href="https://www.chase.com/personal/checking/checking-account-background" target="_blank">Deposit Account Agreement</a>
+  </div>
+</footer>
+
+<!-- COPYRIGHT -->
+<div class="copyright-bar">
+  <p>"Chase," "JPMorgan," "JPMorgan Chase," the JPMorgan Chase logo and the Octagon Symbol are trademarks of JPMorgan Chase Bank, N.A.</p>
+  <p>JPMorgan Chase Bank, N.A. is a wholly-owned subsidiary of JPMorgan Chase &amp; Co.</p>
+  <p style="margin-top:8px"><a href="https://www.chase.com/digital/resources/privacy-security" target="_blank">Privacy</a><a href="https://www.chase.com/digital/resources/terms-of-use" target="_blank">Terms of use</a><a href="https://www.chase.com/digital/resources/privacy-security/security" target="_blank">Security</a><a href="https://www.chase.com/digital/resources/accessibility" target="_blank">Accessibility</a></p>
+  <p style="margin-top:8px">&copy; 2026 JPMorgan Chase &amp; Co. All rights reserved.</p>
+</div>
+
+<script>
+const tooltips = {
+  fee: "The standard monthly charge for maintaining this account.",
+  feeWaiver: "Meet one of these conditions and your monthly fee drops to $0.",
+  overdraft: "What happens if you spend more than your balance.",
+  bonus: "One-time cash bonus for new customers who meet requirements.",
+  atm: "Where you can withdraw cash without paying extra fees.",
+  extras: "Additional features that come with this account."
+};
+
+const accounts = {
+  total: {
+    name: "Chase Total Checking\\u00AE",
+    cardId: "card-total",
+    tag: "Most Popular",
+    tagClass: "",
+    fee: "$15 or $0",
+    feeWaiver: "Direct deposit $500+/mo or $1.5K balance",
+    overdraft: "Chase Overdraft Assist\\u2120",
+    bonus: "\\u2014",
+    atm: "16,000 Chase ATMs",
+    extras: "Checks, wire transfers, Zelle\\u00AE",
+    cta: "Open now",
+    ctaUrl: "https://account.chase.com/consumer/banking/open",
+    detailUrl: "https://www.chase.com/personal/checking/total-checking",
+    details: [
+      "Chase Overdraft Assist\\u2120 \\u2014 $0 overdraft fee on transactions $50 or less",
+      "Over 16,000 Chase ATMs and 4,700 branches nationwide",
+      "Send & receive money with Zelle\\u00AE",
+      "Set up direct deposit and get paid up to 2 days early",
+      "Free checks and wire transfers included",
+      "Paperless statements and mobile check deposit"
+    ]
+  },
+  secure: {
+    name: "Chase Secure Banking\\u2120",
+    cardId: "card-secure",
+    tag: "Best Value",
+    tagClass: "best",
+    fee: "$4.95 or $0",
+    feeWaiver: "$0 for ages 17\\u201324",
+    overdraft: "No overdraft fees",
+    bonus: "$125 bonus",
+    atm: "16,000 Chase ATMs",
+    extras: "Early direct deposit, Zelle\\u00AE",
+    cta: "Open now",
+    ctaUrl: "https://account.chase.com/consumer/banking/open",
+    detailUrl: "https://www.chase.com/personal/checking/secure-banking",
+    details: [
+      "Zero overdraft fees \\u2014 transactions declined if balance is too low",
+      "$125 bonus for new customers with qualifying activities",
+      "$0 monthly fee if you're between 17 and 24 years old",
+      "Get paid up to 2 business days early with direct deposit",
+      "Send & receive money with Zelle\\u00AE",
+      "Chase Mobile\\u00AE app with card lock and alerts"
+    ]
+  },
+  premier: {
+    name: "Chase Premier Plus\\u2120",
+    cardId: "card-premier",
+    tag: "Premium",
+    tagClass: "",
+    fee: "$25 or $0",
+    feeWaiver: "$15K+ avg daily balance",
+    overdraft: "Chase Overdraft Assist\\u2120",
+    bonus: "\\u2014",
+    atm: "No ATM fees worldwide",
+    extras: "No foreign exchange fees",
+    cta: "Open now",
+    ctaUrl: "https://account.chase.com/consumer/banking/open",
+    detailUrl: "https://www.chase.com/personal/checking/premier-plus-checking",
+    details: [
+      "No Chase fees at any ATM worldwide \\u2014 non-Chase ATM fees reimbursed",
+      "No foreign exchange rate adjustment fees on purchases abroad",
+      "Interest earned on qualifying balances",
+      "Perks for military members \\u2014 $0 fee, no minimum deposit",
+      "Linked account fee waivers on other Chase accounts",
+      "Priority phone support and in-branch service"
+    ]
+  },
+  sapphire: {
+    name: "Chase Sapphire\\u2120 Banking",
+    cardId: "card-sapphire",
+    tag: "Elite",
+    tagClass: "",
+    fee: "$35 or $0",
+    feeWaiver: "$75K+ combined balance",
+    overdraft: "Chase Overdraft Assist\\u2120",
+    bonus: "\\u2014",
+    atm: "No ATM fees worldwide",
+    extras: "Dedicated banker, 24/7 priority line",
+    cta: "Schedule a meeting",
+    ctaUrl: "https://www.chase.com/meeting-scheduler/getstarted",
+    detailUrl: "https://www.chase.com/personal/checking/sapphire-banking",
+    details: [
+      "Dedicated Sapphire banker for personalized financial guidance",
+      "Access to J.P. Morgan investing advisors",
+      "24/7 priority customer service line",
+      "No ATM fees worldwide with fee reimbursement",
+      "Higher daily limits on transactions and transfers",
+      "Exclusive access to Chase experiences and events"
+    ]
+  }
+};
+
+function matchIntent(q) {
+  q = q.toLowerCase();
+
+  if (q.match(/studen|college|university|school|young|teen|kid|17|18|19|20|21/)) {
+    return {
+      primary: "secure", secondary: "total",
+      text: "For students and young adults, here are your two best options. <strong>Secure Banking</strong> is free if you're 17\\u201324, while <strong>Total Checking</strong> gives you more features with an easy fee waiver."
+    };
+  }
+  if (q.match(/no fee|low fee|cheap|free|lowest|minimal|afford|budget|save|no monthly/)) {
+    return {
+      primary: "secure", secondary: "total",
+      text: "Here are the two most affordable options side by side. <strong>Secure Banking</strong> has the lowest base fee, while <strong>Total Checking</strong> is $0 with a qualifying direct deposit."
+    };
+  }
+  if (q.match(/everyday|daily|regular|basic|normal|popular|common|simple|main|general/)) {
+    return {
+      primary: "total", secondary: "secure",
+      text: "For everyday banking, here's how our two most popular accounts compare. <strong>Total Checking</strong> has the most features, while <strong>Secure Banking</strong> keeps things simple."
+    };
+  }
+  if (q.match(/premium|wealth|high.?end|luxury|private|sapphire|vip|elite/)) {
+    return {
+      primary: "premier", secondary: "sapphire",
+      text: "For premium banking, here are our top-tier options. <strong>Premier Plus</strong> offers global ATM access, while <strong>Sapphire Banking</strong> adds dedicated wealth management."
+    };
+  }
+  if (q.match(/travel|atm.*fee|international|abroad|foreign|global|overseas/)) {
+    return {
+      primary: "premier", secondary: "total",
+      text: "If you travel or need global ATM access, here's the comparison. <strong>Premier Plus</strong> waives all international fees, while <strong>Total Checking</strong> covers the basics at a lower cost."
+    };
+  }
+  if (q.match(/overdraft|protect|safe|secure|peace of mind/)) {
+    return {
+      primary: "total", secondary: "secure",
+      text: "Great question about overdraft protection. <strong>Total Checking</strong> includes Overdraft Assist for a safety net, while <strong>Secure Banking</strong> eliminates overdraft fees entirely."
+    };
+  }
+  if (q.match(/bonus|sign.?up|offer|promo|deal|reward|incentive|\\$125/)) {
+    return {
+      primary: "secure", secondary: "total",
+      text: "Looking for a bonus? <strong>Secure Banking</strong> offers a <strong>$125 sign-up bonus</strong> right now. Here's how it compares to our most popular account."
+    };
+  }
+  // Off-topic but bankable questions
+  if (q.match(/balance|how much|money in|account balance/)) {
+    return {
+      type: "text",
+      text: "To check your balance, sign in to <strong>chase.com</strong> or the <strong>Chase Mobile app</strong>. You can also call us at 1-800-935-9935 or visit any Chase ATM. If you don't have an account yet, I can help you find the right checking account — just tell me what you're looking for!"
+    };
+  }
+  if (q.match(/send money|zelle|transfer|wire|pay someone|venmo/)) {
+    return {
+      type: "text",
+      text: "You can send money instantly with <strong>Zelle®</strong>, available in all Chase checking accounts. Just sign in to the Chase app, tap 'Pay & transfer,' and send to anyone with a U.S. bank account. Want to open a checking account with Zelle access? I can help you compare options!"
+    };
+  }
+  if (q.match(/credit card|rewards|points|cashback|cash back/)) {
+    return {
+      type: "text",
+      text: "Great question! Chase has a full lineup of credit cards with cashback, travel rewards, and more. I'm focused on checking accounts here, but you can <strong>explore credit cards</strong> on the Credit Cards page. In the meantime, would you like help finding a checking account to pair with your card?"
+    };
+  }
+  if (q.match(/savings|cd |certificate|interest rate|apy|high yield/)) {
+    return {
+      type: "text",
+      text: "Chase offers savings accounts and CDs with competitive rates. I specialize in checking accounts here, but you can explore savings options on the <strong>Savings & CDs</strong> page. Many customers pair a checking account with a savings account — want me to help you pick the right checking account first?"
+    };
+  }
+  if (q.match(/loan|mortgage|home|auto|car|refinance/)) {
+    return {
+      type: "text",
+      text: "Chase offers home loans, auto financing, and more. I'm here to help with checking accounts specifically, but you can explore those options from the navigation above. Want help finding the right checking account in the meantime?"
+    };
+  }
+  if (q.match(/branch|location|near me|atm|open.*account.*in person|appointment/)) {
+    return {
+      type: "text",
+      text: "Chase has over <strong>4,700 branches</strong> and <strong>16,000 ATMs</strong> nationwide. Visit <strong>locator.chase.com</strong> to find the nearest one, or I can help you open an account online right now. Want to see which checking account is right for you?"
+    };
+  }
+  if (q.match(/hello|hi |hey|help|what can you|who are you|how does this work/)) {
+    return {
+      type: "text",
+      text: "Hi! I'm here to help you find the right Chase checking account. You can ask me things like <strong>'What's the cheapest option?'</strong>, <strong>'I'm a college student'</strong>, or <strong>'I need premium banking'</strong> — and I'll show you a side-by-side comparison of the best matches."
+    };
+  }
+
+  // True default — doesn't match anything
+  return {
+    type: "text",
+    text: "I'm not sure I have a specific answer for that, but I'm great at helping you find the right checking account! Try asking about things like <strong>low fees</strong>, <strong>student accounts</strong>, <strong>overdraft protection</strong>, or <strong>premium banking</strong> — and I'll show you a side-by-side comparison."
+  };
+}
+
+function buildCompareRow(label, value, tipKey) {
+  const tip = tooltips[tipKey];
+  return \`<div class="compare-row">
+    <span class="label">\${label}<span class="tip-icon">?</span></span>
+    <span class="value">\${value}</span>
+    \${tip ? \`<div class="tooltip-bubble">\${tip}</div>\` : ''}
+  </div>\`;
+}
+
+function buildCompareCard(id) {
+  const a = accounts[id];
+  const detailItems = (a.details || []).map(d => \`<li>\${d}</li>\`).join('');
+  const uid = 'detail-' + id + '-' + Math.random().toString(36).slice(2,8);
+  return \`<div class="compare-card animate" onclick="highlightCard('\${a.cardId}', '\${a.detailUrl}')">
+    <span class="tag \${a.tagClass}">\${a.tag}</span>
+    <div class="cname">\${a.name}</div>
+    \${buildCompareRow('Monthly fee', a.fee, 'fee')}
+    \${buildCompareRow('Fee waiver', a.feeWaiver, 'feeWaiver')}
+    \${buildCompareRow('Overdraft', a.overdraft, 'overdraft')}
+    \${buildCompareRow('Bonus', a.bonus, 'bonus')}
+    \${buildCompareRow('ATM access', a.atm, 'atm')}
+    \${buildCompareRow('Extras', a.extras, 'extras')}
+    <button class="learn-more-btn" onclick="event.stopPropagation(); toggleDetail('\${uid}', this)">
+      Learn more <span class="arrow">▼</span>
+    </button>
+    <div class="card-detail" id="\${uid}">
+      <h4>Account highlights</h4>
+      <ul>\${detailItems}</ul>
+    </div>
+    <a href="\${a.ctaUrl}" target="_blank" style="text-decoration:none; margin-top:auto; padding-top:16px;" onclick="event.stopPropagation()"><button class="card-cta">\${a.cta}</button></a>
+  </div>\`;
+}
+
+function toggleDetail(uid, btn) {
+  // Find the parent compare-wrap so we can toggle BOTH cards
+  const card = btn.closest('.compare-card');
+  const wrap = card ? card.closest('.compare-wrap') : null;
+  if (wrap) {
+    const allDetails = wrap.querySelectorAll('.card-detail');
+    const allBtns = wrap.querySelectorAll('.learn-more-btn');
+    const isOpening = !btn.classList.contains('open');
+    allDetails.forEach(d => isOpening ? d.classList.add('open') : d.classList.remove('open'));
+    allBtns.forEach(b => isOpening ? b.classList.add('open') : b.classList.remove('open'));
+  } else {
+    document.getElementById(uid).classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+}
+
+function buildTurn(query, result) {
+  if (result.type === 'text') {
+    return \`<div class="thread-turn">
+      <div class="user-query">\${query}</div>
+      <div class="text-response">
+        <p class="bot-text" style="margin-bottom:0">\${result.text}</p>
+      </div>
+    </div>\`;
+  }
+  return \`<div class="thread-turn">
+    <div class="user-query">\${query}</div>
+    <p class="bot-text">\${result.text}</p>
+    <div class="compare-wrap">\${buildCompareCard(result.primary)}\${buildCompareCard(result.secondary)}</div>
+  </div>\`;
+}
+
+let turnCount = 0;
+
+function addTurn(query) {
+  const section = document.getElementById('aiSection');
+  const thread = document.getElementById('chatThread');
+  const initialInput = document.getElementById('initialInput');
+  const followUpInput = document.getElementById('followUpInput');
+
+  // First message: hide initial input, expand section
+  if (turnCount === 0) {
+    initialInput.style.display = 'none';
+    section.classList.remove('collapsed');
+    section.classList.add('expanded');
+  }
+
+  // Hide follow-up input while "thinking"
+  followUpInput.style.display = 'none';
+
+  // Collapse all previous turns
+  if (turnCount > 0) {
+    // Remove old dividers
+    thread.querySelectorAll('.thread-divider').forEach(d => d.remove());
+    // Remove old collapsed labels
+    thread.querySelectorAll('.collapsed-label').forEach(l => l.remove());
+    // Collapse every existing turn
+    thread.querySelectorAll('.thread-turn:not(.collapsed)').forEach(turn => {
+      turn.classList.add('collapsed');
+      turn.onclick = function() {
+        this.classList.toggle('collapsed');
+      };
+    });
+    // Add a single label above the new turn
+    const prevCount = thread.querySelectorAll('.thread-turn.collapsed').length;
+    thread.insertAdjacentHTML('beforeend',
+      \`<div class="collapsed-label">\${prevCount} previous \${prevCount === 1 ? 'question' : 'questions'} · click to expand</div>\`
+    );
+  }
+
+  // Add progress indicator
+  const typingId = 'typing-' + turnCount;
+  const progressSteps = ['Analyzing your needs...', 'Comparing accounts...', 'Finding your best match...'];
+  thread.insertAdjacentHTML('beforeend',
+    \`<div id="\${typingId}" class="thread-turn" style="text-align:center">
+      <div class="user-query">\${query}</div>
+      <div class="progress-indicator">
+        <div class="progress-bar"><div class="progress-fill" id="pbar-\${turnCount}"></div></div>
+        <p class="progress-label" id="plabel-\${turnCount}">\${progressSteps[0]}</p>
+      </div>
+    </div>\`
+  );
+  thread.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+  // Animate progress steps
+  const totalTime = 1200 + Math.random() * 400;
+  const stepTime = totalTime / progressSteps.length;
+  const pbar = document.getElementById('pbar-' + turnCount);
+  const plabel = document.getElementById('plabel-' + turnCount);
+  progressSteps.forEach((step, i) => {
+    setTimeout(() => {
+      if (plabel) plabel.textContent = step;
+      if (pbar) pbar.style.width = ((i + 1) / progressSteps.length * 100) + '%';
+    }, stepTime * i);
+  });
+
+  // Simulate AI thinking
+  setTimeout(() => {
+    const typingEl = document.getElementById(typingId);
+    const result = matchIntent(query);
+
+    // Replace typing with full response
+    typingEl.outerHTML = buildTurn(query, result);
+
+    // Show follow-up input below with dynamic chips
+    followUpInput.style.display = 'block';
+    const followInput = document.getElementById('followUpChatInput');
+    followInput.value = '';
+    followInput.placeholder = 'Ask a follow-up...';
+    renderDynamicChips(query);
+
+    // Scroll to follow-up input
+    setTimeout(() => {
+      followUpInput.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      followInput.focus();
+    }, 100);
+
+    turnCount++;
+  }, totalTime);
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addTurn(text);
+}
+
+function sendFollowUp() {
+  const input = document.getElementById('followUpChatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addTurn(text);
+}
+
+function askQuestion(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
+}
+
+function highlightCard(cardId, detailUrl) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('highlighted'));
+  const allTab = document.querySelector('.tab-btn');
+  if (allTab) switchTab('all', allTab);
+  const card = document.getElementById(cardId);
+  if (card) {
+    card.classList.add('highlighted');
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => card.classList.remove('highlighted'), 4000);
+  }
+  if (detailUrl) window.open(detailUrl, '_blank');
+}
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-all').style.display = tab === 'all' ? 'block' : 'none';
+  document.getElementById('tab-students').style.display = tab === 'students' ? 'block' : 'none';
+  document.getElementById('tab-premium').style.display = tab === 'premium' ? 'block' : 'none';
+}
+
+document.getElementById('chatInput').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+document.getElementById('followUpChatInput').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+/* ── Dynamic suggestion chips ── */
+const chipSets = {
+  fee: ["What about overdraft protection?", "Any sign-up bonuses?", "Best for students?"],
+  student: ["How about a bonus?", "What about overdraft fees?", "Compare premium options"],
+  everyday: ["Tell me about travel perks", "Any bonuses available?", "Premium options?"],
+  premium: ["Compare to everyday accounts", "What about travel fees?", "Is there a bonus?"],
+  travel: ["What are the monthly fees?", "Student options?", "Tell me about overdraft"],
+  overdraft: ["Which has the lowest fees?", "Any bonuses right now?", "Premium banking options?"],
+  bonus: ["What about monthly fees?", "Best for everyday use?", "Student accounts?"],
+  fallback: ["Lowest fee options", "I'm a student", "Best for everyday use", "Premium banking"]
+};
+
+let lastIntent = 'fallback';
+
+function getChipSet(query) {
+  const q = query.toLowerCase();
+  if (q.match(/studen|college|university|young|teen/)) return 'student';
+  if (q.match(/no fee|low fee|cheap|free|lowest|budget/)) return 'fee';
+  if (q.match(/everyday|daily|regular|basic|popular|simple/)) return 'everyday';
+  if (q.match(/premium|wealth|sapphire|vip|elite/)) return 'premium';
+  if (q.match(/travel|international|abroad|foreign|global/)) return 'travel';
+  if (q.match(/overdraft|protect|safe|secure/)) return 'overdraft';
+  if (q.match(/bonus|sign.?up|offer|promo|\\$125/)) return 'bonus';
+  return 'fallback';
+}
+
+function renderDynamicChips(query) {
+  const set = chipSets[getChipSet(query)] || chipSets.fallback;
+  const container = document.getElementById('dynamicChips');
+  container.innerHTML = set.map(c =>
+    \`<button class="chip" onclick="askFollowUp(this.textContent)">\${c}</button>\`
+  ).join('');
+  container.style.opacity = '0';
+  requestAnimationFrame(() => { container.style.opacity = '1'; });
+}
+
+function askFollowUp(text) {
+  document.getElementById('followUpChatInput').value = text;
+  sendFollowUp();
+}
+</script>
+
+</body>
+</html>
+`;
   return new Response(html, {
-    headers: { 'Content-Type': 'text/html; charset=utf-8' },
+    headers: { "Content-Type": "text/html; charset=utf-8" },
   });
 }
